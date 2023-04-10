@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Container } from 'semantic-ui-react';
+import 'react-toastify/dist/ReactToastify.min.css'
 import NavBar from './NavBar';
 import LoadingComponent from './LoadingComponent';
 import { useStore } from '../stores/store';
@@ -9,6 +10,7 @@ import ActivityDashboard from '../../features/activities/dashboard/ActivityDashb
 import ActivityDetails from '../../features/activities/details/ActivityDetails';
 import ActivityForm from '../../features/activities/form/ActivityForm';
 import HomePage from '../../features/home/homePage';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const { activityStore } = useStore();
@@ -21,6 +23,7 @@ function App() {
 
   return (
     <>
+    <ToastContainer position='bottom-right' hideProgressBar theme='colored'/>
       {location.pathname === "/" ? <HomePage /> : (
         <>
           <NavBar/>

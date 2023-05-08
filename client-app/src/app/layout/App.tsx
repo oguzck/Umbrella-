@@ -11,22 +11,30 @@ import ActivityDetails from '../../features/activities/details/ActivityDetails';
 import ActivityForm from '../../features/activities/form/ActivityForm';
 import HomePage from '../../features/home/homePage';
 import { ToastContainer } from 'react-toastify';
+import ModalContainer from '../common/modals/modalContainer';
 
 function App() {
-  const { activityStore } = useStore();
-
-  useEffect(() => {
-    activityStore.loadActivities();
-  }, [activityStore]);
-
+  const { commonStore, userStore } = useStore();
   const location = useLocation();
+  useEffect(()=>{
+    if (commonStore.token) {
+      userStore.getUser().finally(()=> commonStore.setAppLoaded())
+    }else{
+      commonStore.setAppLoaded()
+    }
+  },[commonStore,userStore])
+
+  if (!commonStore.appLoaded) {
+    return <LoadingComponent content='Loading App...'/>
+  }
 
   return (
     <>
-    <ToastContainer position='bottom-right' hideProgressBar theme='colored'/>
+      <ModalContainer/>
+      <ToastContainer position='bottom-right' hideProgressBar theme='colored' />
       {location.pathname === "/" ? <HomePage /> : (
         <>
-          <NavBar/>
+          <NavBar />
           <Container style={{ marginTop: '7em' }}>
             <Outlet />
           </Container>

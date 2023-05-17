@@ -1,3 +1,4 @@
+
 import { action, makeAutoObservable, makeObservable, observable } from "mobx";
 import { runInAction } from "mobx";
 import agent from "../api/agent";
@@ -187,6 +188,9 @@ export default class ActivityStore {
         }finally{
             runInAction(()=>this.loading = false);
         }
+    }
+    clearSelectedActivity =()=>{
+        this.selectedActivity = undefined;
     }
 
 

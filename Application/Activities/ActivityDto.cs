@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Profiles;
+using Domain;
 
 namespace Application.Activities
 {
@@ -19,5 +20,7 @@ namespace Application.Activities
         public bool isCanceled { get; set; }
 
         public ICollection<AttendeeDto> Attendees { get; set; }
+        public ICollection<Comment> Comments { get; set; }
+
     }
 }

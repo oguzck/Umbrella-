@@ -16,6 +16,7 @@ namespace Persistence
 
         public DbSet<Comment> Comments { get; set; }
         public DbSet<UserFollowing> UserFollowings { get; set; }
+        public DbSet<HelpRequest> HelpRequests { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -25,6 +26,11 @@ namespace Persistence
             builder.Entity<ActivityAttendee>().HasOne(u => u.Activity).WithMany(a => a.Attendees).HasForeignKey(aa => aa.ActivityId);
 
             builder.Entity<Comment>().HasOne(a => a.Activtiy).WithMany(c => c.Comments).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<HelpRequest>()
+                            .HasOne(a => a.Author)
+                            .WithMany(c => c.HelpRequests)
+                            .OnDelete(DeleteBehavior.Cascade);
+
 
             builder.Entity<UserFollowing>(b =>
             {

@@ -42,6 +42,7 @@ namespace API.Extensions
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssemblyContaining<Create>();
+            services.AddValidatorsFromAssemblyContaining<Application.HelpRequests.Create>();
             services.AddHttpContextAccessor();
             services.AddScoped<IUserAccessor,UserAccessor>();
             services.AddScoped<IPhotoAccessor,PhotoAccessor>();

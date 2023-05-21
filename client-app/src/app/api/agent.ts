@@ -6,6 +6,7 @@ import { router } from '../router/Routes';
 import { store } from '../stores/store';
 import { User, UserFormValues } from '../models/user';
 import { Photo, Profile } from '../models/profile';
+import { HelpRequestFormValues } from '../models/HelpRequest';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -100,11 +101,15 @@ const Profiles={
     updateFollowing : (username: string) => requests.post(`/follow/${username}`,{}),
     listFollowings : (username : string , predicate : string) => requests.get<Profile[]>(`/follow/${username}?predicate=${predicate}`)
 }
+const HelpRequests = {
+    create: (helprequest: HelpRequestFormValues) => requests.post<void>('/helprequests', helprequest),
+}
 
 const agent = {
     Profiles,
     Activities,
-    Account
+    Account,
+    HelpRequests
 
 }
 export default agent;

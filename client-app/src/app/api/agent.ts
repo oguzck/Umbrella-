@@ -7,6 +7,7 @@ import { store } from '../stores/store';
 import { User, UserFormValues } from '../models/user';
 import { Photo, Profile } from '../models/profile';
 import { HelpRequestFormValues } from '../models/HelpRequest';
+import { Organization, OrganizationFormValues } from '../models/organization';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -86,6 +87,12 @@ const Account={
     register : (user : UserFormValues) => requests.post<User>('/account/register',user)
 
 }
+const OrganizationAccount={
+    current : ()=> requests.get<Organization>('/account'),
+    login : (user : OrganizationFormValues) => requests.post<Organization>('/organization/login',user),
+    //register : (user : UserFormValues) => requests.post<User>('/account/register',user)
+
+}
 const Profiles={
     get : (username : string ) => requests.get<Profile>(`/profiles/${username}`),
     uploadPhoto :(file:Blob) => {
@@ -109,7 +116,8 @@ const agent = {
     Profiles,
     Activities,
     Account,
-    HelpRequests
+    HelpRequests,
+    OrganizationAccount
 
 }
 export default agent;

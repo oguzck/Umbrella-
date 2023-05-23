@@ -50,7 +50,7 @@ namespace Application.HelpRequests
                     Title = request.HelpRequest.Title,
                     Date = DateTime.Now,
                     Description = request.HelpRequest.Description,
-                    isActive = request.HelpRequest.isActive,
+                    isActive = false,
                     Author = user
                 };
 

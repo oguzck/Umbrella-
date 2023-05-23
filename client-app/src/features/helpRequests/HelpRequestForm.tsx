@@ -34,7 +34,6 @@ export default observer( function HelpRequestForm() {
     }
   return (
     <Segment clearing>
-            <Header content='Activity Details' sub color='teal' />
             <Formik validationSchema={validationSchema} enableReinitialize initialValues={initialValues} onSubmit={values => handleFormSubmit(values)} >
                 {({ handleSubmit, isValid, isSubmitting, dirty }) => (
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>

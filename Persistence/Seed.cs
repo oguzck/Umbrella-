@@ -31,6 +31,7 @@ namespace Persistence
                         Email = "tom@test.com"
                     },
                 };
+                
                 var roles = new [] {"Admin","Organization","User"};
                 foreach (var role in roles )
                 {
@@ -42,7 +43,7 @@ namespace Persistence
                 foreach (var user in users)
                 {
                     await userManager.CreateAsync(user, "Pa$$w0rd");
-                    await userManager.AddToRoleAsync(user,"Admin");
+                    await userManager.AddToRoleAsync(user,"User");
                     
                 }
 

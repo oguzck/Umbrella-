@@ -8,7 +8,9 @@ namespace Domain
 {
     public class AppOrganization : IdentityUser
     {
+        public string  DisplayName { get; set; }
         public  string Description { get; set; }
         public  string DonationIban { get; set; }
+        public ICollection<Photo> Photos { get; set; }
     }
 }

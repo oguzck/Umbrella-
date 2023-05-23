@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from 'semantic-ui-react';
 import 'react-toastify/dist/ReactToastify.min.css'
 import NavBar from './NavBar';
@@ -14,15 +14,20 @@ import { ToastContainer } from 'react-toastify';
 import ModalContainer from '../common/modals/modalContainer';
 
 function App() {
-  const { commonStore, userStore } = useStore();
+  const { commonStore, userStore,organizationStore } = useStore();
   const location = useLocation();
+  const [userType, setUserType] = useState(false);
   useEffect(()=>{
     if (commonStore.token) {
-      userStore.getUser().finally(()=> commonStore.setAppLoaded())
-    }else{
+      
+      userStore.getUser().then(()=>organizationStore.getUser()).finally(()=>{ 
+        commonStore.setAppLoaded()})
+    }
+    else{
       commonStore.setAppLoaded()
     }
-  },[commonStore,userStore])
+  },[commonStore,userStore,organizationStore])
+
 
   if (!commonStore.appLoaded) {
     return <LoadingComponent content='Loading App...'/>
@@ -32,7 +37,7 @@ function App() {
     <>
       <ModalContainer/>
       <ToastContainer position='bottom-right' hideProgressBar theme='colored' />
-      {location.pathname === "/" ? <HomePage /> : (
+      {location.pathname === "/" ? <HomePage  /> : (
         <>
           <NavBar />
           <Container style={{ marginTop: '7em' }}>

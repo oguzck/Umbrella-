@@ -1,37 +1,34 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Services;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace API.Controllers
 {
     [AllowAnonymous]
     [ApiController]
     [Route("api/[controller]")]
-    public class AccountController : ControllerBase
+    public class OrganizationController : ControllerBase
     {
-        public UserManager<AppUser> _userManager { get; }
+        public UserManager<AppOrganization> _userManager { get; }
         private readonly TokenService _tokenService;
-        private readonly UserManager<AppOrganization> _userManager2;
 
-        public AccountController(UserManager<AppUser> userManager, UserManager<AppOrganization> userManager2, TokenService tokenService)
+        public OrganizationController(UserManager<AppOrganization> userManager, TokenService tokenService)
         {
-            _userManager2 = userManager2;
             _tokenService = tokenService;
             _userManager = userManager;
 
         }
-
         [HttpPost("login")]
-        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
+        public async Task<ActionResult<OrganizationDto>> Login(LoginDto loginDto)
         {
             var user = await _userManager.Users.Include(p => p.Photos).FirstOrDefaultAsync(x => x.Email == loginDto.Email);
 
@@ -44,7 +41,7 @@ namespace API.Controllers
             if (result)
             {
                 var userRole = await _userManager.GetRolesAsync(user);
-                if (!userRole.Contains("User"))
+                if (userRole.Contains("User"))
                 {
                     return Forbid();
                 }
@@ -53,7 +50,7 @@ namespace API.Controllers
             return Unauthorized();
         }
         [HttpPost("register")]
-        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
+        public async Task<ActionResult<OrganizationDto>> Register(RegisterDto registerDto)
         {
             if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.UserName))
             {
@@ -65,7 +62,7 @@ namespace API.Controllers
                 ModelState.AddModelError("email", "Email taken");
                 return ValidationProblem();
             }
-            var user = new AppUser
+            var user = new AppOrganization
             {
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
@@ -74,55 +71,29 @@ namespace API.Controllers
             var result = await _userManager.CreateAsync(user, registerDto.Password);
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, "User");
                 return CreateUserObject(user);
+
             }
             return BadRequest(result.Errors);
         }
-
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<UserDto>> GetCurrentUser()
+        public async Task<ActionResult<OrganizationDto>> GetCurrentUser()
         {
-
             var user = await _userManager.Users.Include(p => p.Photos).FirstOrDefaultAsync(x => x.Email == User.FindFirstValue(ClaimTypes.Email));
-            if (user is null)
-            {
-                var user2 = await _userManager2.Users.Include(p => p.Photos).FirstOrDefaultAsync(x => x.Email == User.FindFirstValue(ClaimTypes.Email));
-                return CreateOrganizationObject(user2);
-            }
-            else
-            {
-                var role = await _userManager.GetRolesAsync(user);
-                return CreateUserObject(user);
-            }
 
+            return CreateUserObject(user);
 
         }
-        private UserDto CreateUserObject(AppUser user)
+        private OrganizationDto CreateUserObject(AppOrganization organization)
         {
-            {
-                return new UserDto
-                {
-                    DisplayName = user.DisplayName,
-                    Image = user?.Photos?.FirstOrDefault(x => x.IsMain)?.Url,
-                    Token = _tokenService.CreateToken(user),
-                    UserName = user.UserName,
-                    isUser = true
-
-                };
-            }
-
-        }
-        private UserDto CreateOrganizationObject(AppOrganization organization)
-        {
-            return new UserDto
+            return new OrganizationDto
             {
                 DisplayName = organization.DisplayName,
                 Image = organization?.Photos?.FirstOrDefault(x => x.IsMain)?.Url,
                 Token = _tokenService.CreateTokenOrg(organization),
                 UserName = organization.UserName,
-                isUser = false
+                
             };
         }
     }

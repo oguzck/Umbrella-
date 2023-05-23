@@ -6,6 +6,7 @@ import ModalStore from "./modalStore";
 import ProfileStore from "./profileStore";
 import CommentStore from "./commentStore";
 import { HelpRequestStore } from "./helpRequestsStore";
+import OrganizationStore from "./organizationStore";
 
 
 interface Store {
@@ -16,6 +17,7 @@ interface Store {
     profileStore: ProfileStore
     commentStore: CommentStore
     helpRequestStore: HelpRequestStore
+    organizationStore : OrganizationStore
 
 }
 export const store: Store = {
@@ -26,7 +28,8 @@ export const store: Store = {
     modalStore: new ModalStore(),
     profileStore: new ProfileStore(),
     commentStore: new CommentStore(),
-    helpRequestStore: new HelpRequestStore()
+    helpRequestStore: new HelpRequestStore(),
+    organizationStore : new OrganizationStore()
 
 }
 export const StoreContext = createContext(store);

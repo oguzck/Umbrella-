@@ -11,6 +11,7 @@ import ServerError from "../../features/errors/ServerError";
 import LoginForm from "../../features/users/LoginForm";
 import ProfilePage from "../../features/profiles/ProfilePage";
 import HelpRequestForm from "../../features/helpRequests/HelpRequestForm";
+import OrganizationPanel from "../../features/organizations/organizationPanel/OrganizationPanel";
 
 export const routes : RouteObject[] = [
     {
@@ -18,6 +19,7 @@ export const routes : RouteObject[] = [
         element : <App/>,
         children : [
             {path :'activities',element : <ActivityDashboard/>},
+            {path :'organizationPanel',element : <OrganizationPanel/>},
             {path :'activities/:id',element : <ActivityDetails/>},
             {path :'createActivity',element : <ActivityForm key='create'/>},
             {path :'createHelpRequest',element : <HelpRequestForm key='create'/>},

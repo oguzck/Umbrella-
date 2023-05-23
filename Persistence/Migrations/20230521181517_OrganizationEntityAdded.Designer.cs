@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
@@ -10,9 +11,11 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230521181517_OrganizationEntityAdded")]
+    partial class OrganizationEntityAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
@@ -79,9 +82,6 @@ namespace Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("DisplayName")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("DonationIban")
@@ -240,9 +240,6 @@ namespace Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("RelatedOrganizationId")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
@@ -253,17 +250,12 @@ namespace Persistence.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.HasIndex("RelatedOrganizationId");
-
                     b.ToTable("HelpRequests");
                 });
 
             modelBuilder.Entity("Domain.Photo", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("AppOrganizationId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("AppUserId")
@@ -276,8 +268,6 @@ namespace Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppOrganizationId");
 
                     b.HasIndex("AppUserId");
 
@@ -469,21 +459,11 @@ namespace Persistence.Migrations
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Domain.AppOrganization", "RelatedOrganization")
-                        .WithMany()
-                        .HasForeignKey("RelatedOrganizationId");
-
                     b.Navigation("Author");
-
-                    b.Navigation("RelatedOrganization");
                 });
 
             modelBuilder.Entity("Domain.Photo", b =>
                 {
-                    b.HasOne("Domain.AppOrganization", null)
-                        .WithMany("Photos")
-                        .HasForeignKey("AppOrganizationId");
-
                     b.HasOne("Domain.AppUser", null)
                         .WithMany("Photos")
                         .HasForeignKey("AppUserId");
@@ -564,11 +544,6 @@ namespace Persistence.Migrations
                     b.Navigation("Attendees");
 
                     b.Navigation("Comments");
-                });
-
-            modelBuilder.Entity("Domain.AppOrganization", b =>
-                {
-                    b.Navigation("Photos");
                 });
 
             modelBuilder.Entity("Domain.AppUser", b =>

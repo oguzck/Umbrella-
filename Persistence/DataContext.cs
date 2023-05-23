@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Domain;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistence
 {
-    public class DataContext : IdentityDbContext<AppUser>
+    public class DataContext : IdentityDbContext<AppUser,IdentityRole,string>
     {
         public DataContext(DbContextOptions options) : base(options)
         {
@@ -17,6 +18,8 @@ namespace Persistence
         public DbSet<Comment> Comments { get; set; }
         public DbSet<UserFollowing> UserFollowings { get; set; }
         public DbSet<HelpRequest> HelpRequests { get; set; }
+
+        public DbSet<AppOrganization> Organizations { get; set; } // Add DbSet for Organization
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

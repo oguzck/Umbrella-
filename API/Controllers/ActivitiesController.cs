@@ -11,7 +11,7 @@ namespace API.Controllers
 {
     public class ActivitiesController : BaseApiController
     {
-       //[Authorize(Roles = "Admin")]
+       [Authorize(Roles = "User")]
         [HttpGet]
         public async Task<IActionResult> GetActivities()
         {

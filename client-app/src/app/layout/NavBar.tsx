@@ -37,6 +37,7 @@ export default observer(function NavBar() {
                     </>
                 ) : (
                     <>
+                        <Menu.Item as={NavLink} to='/helprequests' name='Help Requests' />
                         <Menu.Item as={NavLink} to='/errors' name='Errors' /><Menu.Item position='right'>
                             <Image src={userOrg?.image || '/assets/user.png'} avatar spaced='right' />
                             <Dropdown pointing='top left' text={userOrg?.displayName}>

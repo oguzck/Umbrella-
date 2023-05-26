@@ -12,6 +12,8 @@ import LoginForm from "../../features/users/LoginForm";
 import ProfilePage from "../../features/profiles/ProfilePage";
 import HelpRequestForm from "../../features/helpRequests/HelpRequestForm";
 import OrganizationPanel from "../../features/organizations/organizationPanel/OrganizationPanel";
+import HelpRequestDashboard from "../../features/organizations/organizationPanel/HelpRequestDashboard";
+import HelpRequestDetailedPage from "../../features/organizations/organizationPanel/HelpRequestDetailedPage";
 
 export const routes : RouteObject[] = [
     {
@@ -19,6 +21,8 @@ export const routes : RouteObject[] = [
         element : <App/>,
         children : [
             {path :'activities',element : <ActivityDashboard/>},
+            {path :'helprequests',element : <HelpRequestDashboard/>},
+            {path :'helprequests/:id',element : <HelpRequestDetailedPage/>},
             {path :'organizationPanel',element : <OrganizationPanel/>},
             {path :'activities/:id',element : <ActivityDetails/>},
             {path :'createActivity',element : <ActivityForm key='create'/>},

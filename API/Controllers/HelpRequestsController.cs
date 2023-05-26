@@ -22,6 +22,11 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new List.Query()));
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetDetails(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new Details.Query{Id = id}));
+        }
 
         [HttpPost("{helpRequestId}/toggle")]
         public async Task<IActionResult> ToggleHelpRequestActivity(Guid helpRequestId)

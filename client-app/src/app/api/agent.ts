@@ -6,7 +6,7 @@ import { router } from '../router/Routes';
 import { store } from '../stores/store';
 import { User, UserFormValues } from '../models/user';
 import { Photo, Profile } from '../models/profile';
-import { HelpRequestFormValues } from '../models/HelpRequest';
+import { HelpRequest, HelpRequestFormValues } from '../models/HelpRequest';
 import { Organization, OrganizationFormValues } from '../models/organization';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
@@ -110,6 +110,9 @@ const Profiles={
 }
 const HelpRequests = {
     create: (helprequest: HelpRequestFormValues) => requests.post<void>('/helprequests', helprequest),
+    list : ()=>requests.get<HelpRequest[]>('/helprequests'),
+    details : (id : string)=>requests.get<HelpRequest>(`/helprequests/${id}`),
+    toggle :(id : string) => requests.post(`/helprequests/${id}/toggle`,{}) 
 }
 
 const agent = {

@@ -1,10 +1,10 @@
 import React from 'react'
 import HelpRequestList from './HelpRequestList'
 
-export default function OrganizationPanel() {
+export default function HelpRequestDashboard() {
   return (
     <>
-    <div>Merhaba</div>
+    <HelpRequestList/>
     </>
   )
 }

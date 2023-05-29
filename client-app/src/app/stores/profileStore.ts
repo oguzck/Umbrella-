@@ -2,6 +2,7 @@ import { makeAutoObservable, reaction, runInAction } from "mobx";
 import { Photo, Profile } from "../models/profile";
 import agent from "../api/agent";
 import { store } from "./store";
+import { HelpRequest } from "../models/HelpRequest";
 
 export default class ProfileStore{
     profile : Profile | null = null;
@@ -11,6 +12,8 @@ export default class ProfileStore{
     followings : Profile[] = [];
     loadingFollowings = false; 
     activeTab = 0;
+    loadingHelpRequests = false;
+    MyHelpRequests : HelpRequest[]=[];
 
     constructor() {
         makeAutoObservable(this);
@@ -159,6 +162,21 @@ export default class ProfileStore{
             runInAction(()=> this.loadingFollowings= false)
         }
 
+    }
+    listHelpRequests = async ()=>{
+        this.loadingHelpRequests = true;
+        try {      
+            runInAction(()=>{
+                const helprequests = this.profile?.helpRequests;
+                this.loadingHelpRequests=false;
+            })
+
+        } catch (error) {
+            console.log(error);
+            runInAction(()=>{
+
+            })
+        }
     }
 
 }

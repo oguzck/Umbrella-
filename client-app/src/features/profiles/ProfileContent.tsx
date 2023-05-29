@@ -6,6 +6,7 @@ import { observer } from 'mobx-react-lite';
 import ProfileAbout from './ProfileAbout';
 import ProfileFollowings from './ProfileFollowings';
 import { useStore } from '../../app/stores/store';
+import ProfileHelpRequests from './ProfileHelpRequests';
 
 interface Props {
   profile: Profile;
@@ -20,6 +21,9 @@ export default observer(function ProfileContent({ profile }: Props) {
     { menuItem: 'Followers', render: () => <ProfileFollowings /> },
     { menuItem: 'Following', render: () => <ProfileFollowings /> },
   ]
+  if (profileStore.isCurrentUser) {
+    panes.push({ menuItem: 'My Help Requests', render: () => <ProfileHelpRequests /> });
+  }
   return (
     <Tab menu={{ fluid: true, vertical: true }} menuPosition='right' panes={panes} onTabChange={(e,data)=>profileStore.setActiveTab(data.activeIndex)} />
   )

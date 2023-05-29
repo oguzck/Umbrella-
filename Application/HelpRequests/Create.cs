@@ -50,6 +50,8 @@ namespace Application.HelpRequests
                     Title = request.HelpRequest.Title,
                     Date = DateTime.Now,
                     Description = request.HelpRequest.Description,
+                    ContactNumber = request.HelpRequest.ContactNumber,
+                    Adress=request.HelpRequest.Adress,
                     isActive = false,
                     Author = user
                 };

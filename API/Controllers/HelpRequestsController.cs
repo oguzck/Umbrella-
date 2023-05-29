@@ -25,13 +25,18 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDetails(Guid id)
         {
-            return HandleResult(await Mediator.Send(new Details.Query{Id = id}));
+            return HandleResult(await Mediator.Send(new Details.Query { Id = id }));
         }
 
         [HttpPost("{helpRequestId}/toggle")]
         public async Task<IActionResult> ToggleHelpRequestActivity(Guid helpRequestId)
         {
             return HandleResult(await Mediator.Send(new ActiveToggle.Command { HelpRequestId = helpRequestId }));
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteHelpRequest(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new Delete.Command { Id = id }));
         }
     }
 }

@@ -2,6 +2,8 @@ export interface HelpRequestFormValues {
     id : string,
     title : string,     
     description : string
+    contactNumber : string
+    adress : string
 }
 export interface HelpRequest {
     id : string,
@@ -14,5 +16,8 @@ export interface HelpRequest {
     displayName : string,
     image : string 
     organizationName? : string
+    contactNumber? : string
+    adress:string
+    
     
 }

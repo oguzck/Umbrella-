@@ -1,3 +1,4 @@
+import { HelpRequest } from "./HelpRequest";
 import { User } from "./user";
 
 export interface Profile {
@@ -9,6 +10,7 @@ export interface Profile {
     followersCount : number;
     followingCount : number;
     following : boolean;
+    helpRequests : HelpRequest[];
 }
 
 export class Profile implements Profile{

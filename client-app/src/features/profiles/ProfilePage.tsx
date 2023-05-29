@@ -30,7 +30,6 @@ export default observer(function ProfilePage() {
                     </>
                 }
 
-
             </Grid.Column>
         </Grid>
     )

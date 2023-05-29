@@ -17,6 +17,7 @@ export default observer(function HelpRequestList() {
 
     return (
         <>
+        <Header content='Help Request Pool'/>
             {helpRequests
                 .filter(helprequest => !helprequest.isActive)
                 .map(helprequest => (

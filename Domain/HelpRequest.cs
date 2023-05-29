@@ -14,6 +14,8 @@ namespace Domain
         public bool isActive { get; set; } = false;
         public AppUser Author { get; set; }
         public AppOrganization RelatedOrganization { get; set; }
+        public string ContactNumber { get; set; }
+        public string Adress { get; set; }
 
     }
 }

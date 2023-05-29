@@ -112,7 +112,8 @@ const HelpRequests = {
     create: (helprequest: HelpRequestFormValues) => requests.post<void>('/helprequests', helprequest),
     list : ()=>requests.get<HelpRequest[]>('/helprequests'),
     details : (id : string)=>requests.get<HelpRequest>(`/helprequests/${id}`),
-    toggle :(id : string) => requests.post(`/helprequests/${id}/toggle`,{}) 
+    toggle :(id : string) => requests.post(`/helprequests/${id}/toggle`,{}) ,
+    delete :(id : string) => requests.del(`/helprequests/${id}/`) 
 }
 
 const agent = {

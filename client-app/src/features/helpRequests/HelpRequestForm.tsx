@@ -22,11 +22,15 @@ export default observer( function HelpRequestForm() {
     const initialValues = {
         id : '',
         title : '',
-        description : ''
+        description : '',
+        contactNumber : '',
+        adress : ''
     }
     const validationSchema = Yup.object({
         title: Yup.string().required('The Help Request title is required'),
         description: Yup.string().required('The Help Request description  is required'),
+        contactNumber : Yup.string().required("The Phone Number is required"),
+        adress : Yup.string().required("The Adress is required")
     })
     function handleFormSubmit(helpRequest : HelpRequestFormValues) {
             helpRequest.id = uuid();
@@ -39,6 +43,9 @@ export default observer( function HelpRequestForm() {
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                         <MyTextInput name='title' placeholder='Title' />
                         <MyTextArea rows={3} placeholder='Description' name='description' />
+                        <MyTextArea rows={3} placeholder='Adress' name='adress' />
+                        <Header content='Please Enter Your Phone Number Without 0 at the beginning' sub color='teal' />
+                        <MyTextInput name='contactNumber' placeholder='Phone Number' />
                         <Button disabled={isSubmitting || !dirty || !isValid} loading={loading} floated='right' positive type='submit' content='Submit' />
                         <Button as={Link} to='/activities' floated='right' type='button' content='Cancel' />
                     </Form>

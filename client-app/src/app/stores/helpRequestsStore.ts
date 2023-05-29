@@ -83,6 +83,23 @@ export class HelpRequestStore{
           runInAction(() => (this.loading = false));
         }
       };
+      deleteHelpRequest = async (id: string) => {
+        this.loading = true;
+        try {
+            await agent.HelpRequests.delete(id);
+            runInAction(() => {
+                this.helpRequestRegistry.delete(id);
+                this.loading = false;
+
+            })
+        } catch (error) {
+            console.log(error);
+            runInAction(() => {
+                this.loading = false;
+            })
+        }
+
+    }
       
       
 

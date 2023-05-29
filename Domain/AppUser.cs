@@ -15,6 +15,7 @@ namespace Domain
         public ICollection<UserFollowing> Followings { get; set; }
         public ICollection<UserFollowing> Followers { get; set; }
         public ICollection<HelpRequest> HelpRequests { get; set; }
+        public ICollection<JobApplications> Applications { get; set; }
 
 
     }

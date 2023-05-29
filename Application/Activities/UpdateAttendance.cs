@@ -37,7 +37,7 @@ namespace Application.Activities
                 var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
 
                 if (user == null) return null;
-
+                
                 var hostUsername = activity.Attendees.FirstOrDefault(x => x.IsHost)?.AppUser?.UserName;
                 var attendance = activity.Attendees.FirstOrDefault(x => x.AppUser.UserName == user.UserName);
                 if (attendance != null && hostUsername == user.UserName)

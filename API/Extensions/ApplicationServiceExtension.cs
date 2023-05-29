@@ -43,6 +43,7 @@ namespace API.Extensions
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssemblyContaining<Create>();
             services.AddValidatorsFromAssemblyContaining<Application.HelpRequests.Create>();
+            services.AddValidatorsFromAssemblyContaining<Application.JobAdversitements.Create>();
             services.AddHttpContextAccessor();
             services.AddScoped<IUserAccessor,UserAccessor>();
             services.AddScoped<IPhotoAccessor,PhotoAccessor>();

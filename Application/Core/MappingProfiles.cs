@@ -1,6 +1,7 @@
 using Application.Activities;
 using Application.Comments;
 using Application.HelpRequests;
+using Application.JobAdversitements;
 using AutoMapper;
 using Domain;
 
@@ -18,6 +19,14 @@ namespace Application.Core
                .ForMember(d => d.OrganizationName, o => o.MapFrom(s => s.RelatedOrganization.DisplayName))
                .ForMember(d => d.Email, o => o.MapFrom(s => s.Author.Email));
 
+            CreateMap<JobAdver, JobAdverDto>()
+                        .ForMember(d=>d.OrganizationName,o=>o.MapFrom(s=>s.organization.DisplayName));
+
+             CreateMap<JobApplications, JobApplicationsDto>()
+                            .ForMember(d=>d.ApplicantImage ,o=>o.MapFrom(s=>s.Applicant.Photos.FirstOrDefault(x => x.IsMain).Url))
+                            .ForMember(d=>d.ApplicantName ,o=>o.MapFrom(s=>s.Applicant.DisplayName))
+                            .ForMember(d=>d.ApplicantUsername ,o=>o.MapFrom(s=>s.Applicant.UserName));
+                            
 
             CreateMap<Activity, Activity>();
             CreateMap<Activity, ActivityDto>().ForMember(d => d.HostUsername, o => o

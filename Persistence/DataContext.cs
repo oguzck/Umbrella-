@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Persistence
 {
-    public class DataContext : IdentityDbContext<AppUser,IdentityRole,string>
+    public class DataContext : IdentityDbContext<AppUser, IdentityRole, string>
     {
         public DataContext(DbContextOptions options) : base(options)
         {
@@ -19,7 +19,11 @@ namespace Persistence
         public DbSet<UserFollowing> UserFollowings { get; set; }
         public DbSet<HelpRequest> HelpRequests { get; set; }
 
-        public DbSet<AppOrganization> Organizations { get; set; } // Add DbSet for Organization
+        public DbSet<AppOrganization> Organizations { get; set; }
+        public DbSet<JobAdver> JobAdversitements { get; set; }
+        public DbSet<JobApplications> Applications { get; set; }
+
+        
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -33,6 +37,21 @@ namespace Persistence
                             .HasOne(a => a.Author)
                             .WithMany(c => c.HelpRequests)
                             .OnDelete(DeleteBehavior.Cascade);
+
+            
+            builder.Entity<JobAdver>()
+                            .HasOne(org=>org.organization)
+                            .WithMany(c=>c.JobAdversitements)
+                            .OnDelete(DeleteBehavior.Cascade);
+            
+            builder.Entity<JobApplications>(x=>x.HasKey(a=>new{a.ApplicantId,a.JobId}));
+            builder.Entity<JobApplications>().HasOne(u=>u.Applicant).WithMany(a=>a.Applications).HasForeignKey(a=>a.ApplicantId).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<JobApplications>().HasOne(u=>u.JobAdversitement).WithMany(a=>a.Applications).HasForeignKey(a=>a.JobId).OnDelete(DeleteBehavior.Cascade);
+                            
+                         
+
+
+
 
 
             builder.Entity<UserFollowing>(b =>

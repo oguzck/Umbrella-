@@ -28,6 +28,7 @@ export default class OrganizationStore{
      logoutOrg = () =>{
         store.commonStore.setToken(null);
         this.userOrg = null ;
+        store.userStore.user=null;
         runInAction(()=>{
             router.navigate('/')
         })

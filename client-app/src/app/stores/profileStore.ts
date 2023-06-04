@@ -46,6 +46,7 @@ export default class ProfileStore{
             const profile =  await agent.Profiles.get(username)
             runInAction(()=>{
                 this.profile =profile;
+                this.MyHelpRequests=profile.helpRequests
                 this.loadingProfile = false;
             })
         } catch (error) {
@@ -165,18 +166,11 @@ export default class ProfileStore{
     }
     listHelpRequests = async ()=>{
         this.loadingHelpRequests = true;
-        try {      
             runInAction(()=>{
-                const helprequests = this.profile?.helpRequests;
+                this.MyHelpRequests = this.profile!.helpRequests;
                 this.loadingHelpRequests=false;
             })
 
-        } catch (error) {
-            console.log(error);
-            runInAction(()=>{
-
-            })
-        }
     }
 
 }

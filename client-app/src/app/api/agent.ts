@@ -8,6 +8,8 @@ import { User, UserFormValues } from '../models/user';
 import { Photo, Profile } from '../models/profile';
 import { HelpRequest, HelpRequestFormValues } from '../models/HelpRequest';
 import { Organization, OrganizationFormValues } from '../models/organization';
+import { ApplicationFormValues, Applications } from '../models/applications';
+import { JobAdversitements, JobAdversitementsFormValues } from '../models/jobAdversitement';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -115,13 +117,21 @@ const HelpRequests = {
     toggle :(id : string) => requests.post(`/helprequests/${id}/toggle`,{}) ,
     delete :(id : string) => requests.del(`/helprequests/${id}/`) 
 }
+const JobAdversitement = {
+    create: (jobAdversitement: JobAdversitementsFormValues) => requests.post<void>('/jobadversitements', jobAdversitement),
+    list : ()=>requests.get<JobAdversitements[]>('/jobadversitements'),
+    details : (id : string)=>requests.get<JobAdversitements>(`/jobadversitements/${id}`),
+    apply :(id : string , application : ApplicationFormValues) => requests.post(`/jobadversitements/${id}/apply`,application) ,
+    delete :(id : string) => requests.del(`/jobadversitements/${id}/`) 
+}
 
 const agent = {
     Profiles,
     Activities,
     Account,
     HelpRequests,
-    OrganizationAccount
+    OrganizationAccount,
+    JobAdversitement
 
 }
 export default agent;

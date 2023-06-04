@@ -28,9 +28,7 @@ export default observer(function HelpRequestListItem({ helprequest }: Props) {
                                 <Item.Header as={Link} to={`/helprequests/${helprequest.id}`} >{helprequest.title}</Item.Header>
                                 <Item.Description>Created By <Link to={`/profiles/${helprequest.username}`}>{helprequest.displayName}</Link> </Item.Description>
                                 <Item.Description>
-                                    <span>
-                                        <Icon name='clock' /> {formattedDate}
-                                    </span></Item.Description>
+                                    <span><Icon name='clock' /> {formattedDate}</span></Item.Description>
                             </Item.Content>
                         ) : (
                             <><Item.Image size='tiny' circular src={helprequest.image || 'assets/user.png'} /><Item.Content>

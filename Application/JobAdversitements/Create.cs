@@ -46,6 +46,7 @@ namespace Application.JobAdversitements
                 {
                     Title = request.JobAdver.Title,
                     Date = DateTime.Now,
+                    City = request.JobAdver.City,
                     ExpiringDate = DateTime.Now.AddDays(30),
                     Description = request.JobAdver.Description,
                     Skills = request.JobAdver.Skills,

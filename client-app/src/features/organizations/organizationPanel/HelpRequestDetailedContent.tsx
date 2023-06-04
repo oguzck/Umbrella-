@@ -1,6 +1,6 @@
 import React from 'react'
 import { HelpRequest } from '../../../app/models/HelpRequest'
-import { Grid, Icon, Segment } from 'semantic-ui-react'
+import { Grid, Header, Icon, Segment } from 'semantic-ui-react'
 import { format } from 'date-fns'
 import { observer } from 'mobx-react-lite'
 interface Props {
@@ -11,7 +11,7 @@ export default observer( function HelpRequestDetailedContent({ helprequest }: Pr
     return (
         <Segment.Group attached ='top'>
 
-            <Segment attached='top'>
+            <Segment >
                 <Grid>
                     <Grid.Column width={1}>
                         <Icon size='large' color='teal' name='info' />
@@ -21,9 +21,7 @@ export default observer( function HelpRequestDetailedContent({ helprequest }: Pr
                     </Grid.Column>
                 </Grid>
             </Segment>
-
-            <Segment attached>
-
+            <Segment>
                 <Grid verticalAlign='middle'>
                     <Grid.Column width={1}>
                         <Icon name='calendar' size='large' color='teal' />
@@ -32,32 +30,38 @@ export default observer( function HelpRequestDetailedContent({ helprequest }: Pr
                         {formattedDate}
                     </Grid.Column>
                 </Grid>
-
             </Segment>
-
-            <Segment attached='top'>
+            <Segment >
 
                 <Grid verticalAlign='middle'>
                     <Grid.Column width={1}>
                         <Icon size='large' color='teal' name='envelope square' />
                     </Grid.Column>
                     <Grid.Column width={15}>
-                        <p>{helprequest.email}</p>
+                        {helprequest.email}
                     </Grid.Column>
                 </Grid>
 
             </Segment>
-            <Segment attached='top'>
-
+            <Segment >
                 <Grid verticalAlign='middle'>
                     <Grid.Column width={1}>
                         <Icon size='large' color='teal' name='phone square' />
                     </Grid.Column>
                     <Grid.Column width={15}>
-                        <p>{helprequest.contactNumber}</p>
+                        {helprequest.contactNumber}
                     </Grid.Column>
                 </Grid>
-
+            </Segment>
+            <Segment >
+                <Grid verticalAlign='middle'>
+                    <Grid.Column width={1}>
+                        <Icon size='large' color='teal' name='marker' />
+                    </Grid.Column>
+                    <Grid.Column width={15}>
+                        {helprequest.adress}
+                    </Grid.Column>
+                </Grid>
             </Segment>
         </Segment.Group>
     )

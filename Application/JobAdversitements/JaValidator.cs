@@ -12,11 +12,10 @@ namespace Application.JobAdversitements
         public JaValidator()
         {
             RuleFor(x => x.Title).NotEmpty();
-            RuleFor(x=>x.Date).NotEmpty();
             RuleFor(x => x.Description).NotEmpty();
             RuleFor(x => x.Skills).NotEmpty();
-            RuleFor(x => x.isPaid).NotEmpty();
-
+            RuleFor(x => x.City).NotEmpty();
+            RuleFor(x => x.isPaid).NotNull();
         }
     }
 }

@@ -15,32 +15,33 @@ import { observer } from 'mobx-react-lite'
 import modalStore from '../../app/stores/modalStore'
 import Success from '../../app/common/form/Success'
 
-export default observer( function HelpRequestForm() {
-    const {helpRequestStore,modalStore} = useStore()
-    const {loading,createHelpRequest} = helpRequestStore
+export default observer(function HelpRequestForm() {
+    const { helpRequestStore, modalStore } = useStore()
+    const { loading, createHelpRequest } = helpRequestStore
     const navigate = useNavigate();
     const initialValues = {
-        id : '',
-        title : '',
-        description : '',
-        contactNumber : '',
-        adress : ''
+        id: '',
+        title: '',
+        description: '',
+        contactNumber: '',
+        adress: ''
     }
     const validationSchema = Yup.object({
         title: Yup.string().required('The Help Request title is required'),
         description: Yup.string().required('The Help Request description  is required'),
-        contactNumber : Yup.string().required("The Phone Number is required"),
-        adress : Yup.string().required("The Adress is required")
+        contactNumber: Yup.string().required("The Phone Number is required"),
+        adress: Yup.string().required("The Adress is required")
     })
-    function handleFormSubmit(helpRequest : HelpRequestFormValues) {
-            helpRequest.id = uuid();
-            createHelpRequest(helpRequest).then(() => modalStore.openModal(<Success />))
+    function handleFormSubmit(helpRequest: HelpRequestFormValues) {
+        helpRequest.id = uuid();
+        createHelpRequest(helpRequest).then(() => modalStore.openModal(<Success />))
     }
-  return (
-    <Segment clearing>
+    return (
+        <Segment clearing>
             <Formik validationSchema={validationSchema} enableReinitialize initialValues={initialValues} onSubmit={values => handleFormSubmit(values)} >
                 {({ handleSubmit, isValid, isSubmitting, dirty }) => (
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
+                        <Header content='Help Request Details' sub color='teal' />
                         <MyTextInput name='title' placeholder='Title' />
                         <MyTextArea rows={3} placeholder='Description' name='description' />
                         <MyTextArea rows={3} placeholder='Adress' name='adress' />
@@ -53,5 +54,5 @@ export default observer( function HelpRequestForm() {
 
             </Formik>
         </Segment>
-  )
+    )
 })

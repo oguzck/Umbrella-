@@ -40,6 +40,7 @@ export default class UserStore{
      logout = () =>{
         store.commonStore.setToken(null);
         this.user = null ;
+        store.organizationStore.userOrg=null;
         runInAction(()=> {
             
             router.navigate('/')

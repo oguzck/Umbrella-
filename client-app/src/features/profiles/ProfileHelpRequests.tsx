@@ -9,7 +9,7 @@ import { useStore } from '../../app/stores/store'
 
 export default observer(function ProfileHelpRequests() {
     const {profileStore}=useStore()
-    const {profile ,loadingHelpRequests} = profileStore
+    const {profile ,loadingHelpRequests,MyHelpRequests} = profileStore
     
   return (
     <Tab.Pane loading={loadingHelpRequests}>
@@ -18,7 +18,7 @@ export default observer(function ProfileHelpRequests() {
             <Header floated='left' icon='user' content={`My Help Requests`} />
         </Grid.Column>
         <Grid.Column width='16'>
-            {profile!.helpRequests.map((helprequest=>
+            {MyHelpRequests.map((helprequest=>
                  <HelpRequestListItem key={helprequest.id} helprequest={helprequest}/>
             ))}
         </Grid.Column>

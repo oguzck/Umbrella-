@@ -7,6 +7,7 @@ import ProfileStore from "./profileStore";
 import CommentStore from "./commentStore";
 import { HelpRequestStore } from "./helpRequestsStore";
 import OrganizationStore from "./organizationStore";
+import { JobAdverStore } from "./jobAdverStore";
 
 
 interface Store {
@@ -18,6 +19,7 @@ interface Store {
     commentStore: CommentStore
     helpRequestStore: HelpRequestStore
     organizationStore : OrganizationStore
+    jobAdverStore : JobAdverStore
 
 }
 export const store: Store = {
@@ -29,7 +31,8 @@ export const store: Store = {
     profileStore: new ProfileStore(),
     commentStore: new CommentStore(),
     helpRequestStore: new HelpRequestStore(),
-    organizationStore : new OrganizationStore()
+    organizationStore : new OrganizationStore(),
+    jobAdverStore : new JobAdverStore()
 
 }
 export const StoreContext = createContext(store);

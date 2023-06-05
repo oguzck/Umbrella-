@@ -3,6 +3,7 @@ import { Photo, Profile } from "../models/profile";
 import agent from "../api/agent";
 import { store } from "./store";
 import { HelpRequest } from "../models/HelpRequest";
+import { Activity } from "../models/activity";
 
 export default class ProfileStore{
     profile : Profile | null = null;
@@ -14,6 +15,7 @@ export default class ProfileStore{
     activeTab = 0;
     loadingHelpRequests = false;
     MyHelpRequests : HelpRequest[]=[];
+    MyActivities : Activity[]=[]
 
     constructor() {
         makeAutoObservable(this);
@@ -44,15 +46,18 @@ export default class ProfileStore{
         this.loadingProfile = true;
         try {
             const profile =  await agent.Profiles.get(username)
+            const activities = await agent.Activities.list();
             runInAction(()=>{
                 this.profile =profile;
                 this.MyHelpRequests=profile.helpRequests
+                this.profile.activities = activities.filter(x=>x.hostUsername==profile.username)
                 this.loadingProfile = false;
             })
         } catch (error) {
             console.log(error);
             runInAction(() => this.loadingProfile = false );
         }
+        console.log(this.profile)
     }
 
     updateProfile = async (profile:Partial<Profile>) =>{
@@ -171,6 +176,10 @@ export default class ProfileStore{
                 this.loadingHelpRequests=false;
             })
 
+    }
+    listActivities = async ()=>{
+      
+        
     }
 
 }

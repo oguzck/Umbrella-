@@ -18,6 +18,7 @@ export default observer(function JobAdversitementForm() {
     const validationSchema = Yup.object({
         title: Yup.string().required('The job title is required'),
         description: Yup.string().required('The job description  is required'),
+        city: Yup.string().required('The city is required'),
         skills: Yup.string().required("The job skills  is required"),
         isPaid: Yup.bool().required("isPaid is required")
 
@@ -36,10 +37,11 @@ export default observer(function JobAdversitementForm() {
         createJobAdversitement(jobAdversitement)
     }
     return (
-        <><Header content='Job Adversitement' color='black' /><Segment clearing>
+        <><Segment clearing>
             <Formik validationSchema={validationSchema} enableReinitialize initialValues={initialValues} onSubmit={values => handleFormSubmit(values)}>
                 {({ handleSubmit, isValid, isSubmitting, dirty, values, setFieldValue }) => (
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
+                        <Header content='Job Adversitement' sub color='teal' />
                         <MyTextInput name='title' placeholder='Title' />
                         <MyTextArea rows={3} placeholder='Description' name='description' />
                         <MyTextInput name='city' placeholder='City' />

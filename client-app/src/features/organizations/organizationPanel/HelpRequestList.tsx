@@ -19,7 +19,7 @@ export default observer(function HelpRequestList() {
 
     return (
         <>
-        <Header content='Help Request Pool' />
+        <Header content='Help Request Pool' color='teal' />
         {filteredHelpRequests.length ? (
             filteredHelpRequests 
                 .map(helpRequest => (

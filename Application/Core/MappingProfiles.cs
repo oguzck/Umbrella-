@@ -17,10 +17,13 @@ namespace Application.Core
                .ForMember(d => d.Username, o => o.MapFrom(s => s.Author.UserName))
                .ForMember(d => d.Image, o => o.MapFrom(s => s.Author.Photos.FirstOrDefault(x => x.IsMain).Url))
                .ForMember(d => d.OrganizationName, o => o.MapFrom(s => s.RelatedOrganization.DisplayName))
+               .ForMember(d => d.OrganizationUserName, o => o.MapFrom(s => s.RelatedOrganization.UserName))
                .ForMember(d => d.Email, o => o.MapFrom(s => s.Author.Email));
 
             CreateMap<JobAdver, JobAdverDto>()
-                        .ForMember(d=>d.OrganizationName,o=>o.MapFrom(s=>s.organization.DisplayName));
+                        .ForMember(d=>d.OrganizationName,o=>o.MapFrom(s=>s.organization.DisplayName))
+                        .ForMember(d=>d.OrganizationUserName,o=>o.MapFrom(s=>s.organization.UserName))
+                        .ForMember(d=>d.OrganizationImage,o=>o.MapFrom(s=>s.organization.Photos.FirstOrDefault(x => x.IsMain).Url));
 
              CreateMap<JobApplications, JobApplicationsDto>()
                             .ForMember(d=>d.ApplicantImage ,o=>o.MapFrom(s=>s.Applicant.Photos.FirstOrDefault(x => x.IsMain).Url))

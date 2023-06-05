@@ -19,6 +19,7 @@ namespace Application.HelpRequests
         public string DisplayName { get; set; }
         public string Image { get; set; }
         public string OrganizationName { get; set; }
+        public string OrganizationUserName { get; set; }
         [Required(ErrorMessage = "Phone number is required")]
         [RegularExpression(@"^\d{10}$", ErrorMessage = "Invalid phone number")]
         public string ContactNumber { get; set; }

@@ -19,5 +19,7 @@ export interface JobAdversitements{
     isPaid: boolean 
     city : string
     organizationName: string
+    organizationUserName: string
     applications: Applications[]
+    organizationImage:string;
 }

@@ -177,9 +177,5 @@ export default class ProfileStore{
             })
 
     }
-    listActivities = async ()=>{
-      
-        
-    }
 
 }

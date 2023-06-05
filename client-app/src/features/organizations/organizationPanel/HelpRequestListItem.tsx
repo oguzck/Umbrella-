@@ -22,7 +22,7 @@ export default observer(function HelpRequestListItem({ helprequest }: Props) {
                         {profileStore.isCurrentUser ? (
                             <Item.Content>
                                 {helprequest.isActive &&
-                                    <Label attached='top' color='green' style={{ textAlign: 'center' }} >Active : Related Organization:<Link to={'/profiles/bob'}>{helprequest.organizationName}</Link> </Label>
+                                    <Label attached='top' color='green' style={{ textAlign: 'center' }} >Active : Related Organization:<Link to={`/orgprofiles/${helprequest.organizationUserName}`}>{helprequest.organizationName}</Link> </Label>
                                 }
 
                                 <Item.Header as={Link} to={`/helprequests/${helprequest.id}`} >{helprequest.title}</Item.Header>

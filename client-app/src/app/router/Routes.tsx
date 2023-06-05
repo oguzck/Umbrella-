@@ -18,6 +18,7 @@ import JobAdversitementForm from "../../features/jobAdversitements/form/JobAdver
 import JobAdversitementsDashboard from "../../features/jobAdversitements/dashboard/JobAdversitementsDashboard";
 import JobAdversitementDetails from "../../features/jobAdversitements/details/jobAdversitementDetails";
 import ApplicationForm from "../../features/jobAdversitements/form/ApplicationForm";
+import OrgProfilePage from "../../features/orgProfiles/OrgProfilePage";
 
 export const routes : RouteObject[] = [
     {
@@ -37,6 +38,7 @@ export const routes : RouteObject[] = [
             {path :'createJobadversitement',element : <JobAdversitementForm/>},
             {path :'manage/:id',element : <ActivityForm key='manage'/>},
             {path :'profiles/:username',element : <ProfilePage/>},
+            {path :'orgprofiles/:username',element : <OrgProfilePage/>},
             {path :'login',element : <LoginForm/>},
             {path :'errors',element : <TestErrors/>},
             {path :'not-found',element : <NotFound content="We could not found what you are looking for"/>},

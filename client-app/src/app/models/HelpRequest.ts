@@ -16,6 +16,7 @@ export interface HelpRequest {
     displayName : string,
     image : string 
     organizationName? : string
+    organizationUserName? : string
     contactNumber? : string
     adress:string
     

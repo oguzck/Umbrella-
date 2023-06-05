@@ -1,16 +1,13 @@
-import React, { useEffect } from 'react'
-import { Button, Divider, Grid, Header, Item, Reveal, Segment, Statistic } from 'semantic-ui-react'
-import { Profile } from '../../app/models/profile';
+import { Divider, Grid, Header, Item, Segment, Statistic } from 'semantic-ui-react'
 import { observer } from 'mobx-react-lite';
-import FollowButton from './FollowButton';
-
+import { OrgProfile } from '../../app/models/organizationProfile';
 
 interface Props{
-    profile : Profile;
+    profile : OrgProfile;
 
 }
 
-export default observer( function ProfileHeader({profile}:Props) {
+export default observer( function OrgProfileHeader({profile}:Props) {
   return (
     <Segment>
         <Grid>
@@ -26,11 +23,9 @@ export default observer( function ProfileHeader({profile}:Props) {
             </Grid.Column>
             <Grid.Column width={4}>
                 <Statistic.Group widths={2}>
-                    <Statistic label = 'Followers' value = {profile.followersCount}/>
-                    <Statistic label = 'Following' value = {profile.followingCount}/>
+
                 </Statistic.Group>
                 <Divider/>
-                <FollowButton profile={profile}/>
             </Grid.Column>
         </Grid>
     </Segment>

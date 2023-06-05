@@ -54,7 +54,7 @@ export default observer( function JobAdversitementDetails() {
                         <Icon size='large' color='teal' name='building' />
                     </Grid.Column>
                     <Grid.Column width={15}>
-                        <p>{selectedJobAdversitement.organizationName}</p>
+                        <p><Link to={`/orgprofiles/${selectedJobAdversitement.organizationUserName}`}>{selectedJobAdversitement.organizationName}</Link></p>
                     </Grid.Column>
                 </Grid>
             </Segment>

@@ -18,6 +18,8 @@ namespace Application.JobAdversitements
         public bool isActive { get; set; }
         public bool isPaid { get; set; }
         public string OrganizationName { get; set; }
+        public string OrganizationUserName { get; set; }
+        public string OrganizationImage { get; set; }
         public ICollection<JobApplicationsDto> Applications { get; set; } 
     }
 }

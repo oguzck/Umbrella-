@@ -10,6 +10,7 @@ import { HelpRequest, HelpRequestFormValues } from '../models/HelpRequest';
 import { Organization, OrganizationFormValues } from '../models/organization';
 import { ApplicationFormValues, Applications } from '../models/applications';
 import { JobAdversitements, JobAdversitementsFormValues } from '../models/jobAdversitement';
+import { OrgProfile } from '../models/organizationProfile';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -124,14 +125,27 @@ const JobAdversitement = {
     apply :(id : string , application : ApplicationFormValues) => requests.post(`/jobadversitements/${id}/apply`,application) ,
     delete :(id : string) => requests.del(`/jobadversitements/${id}/`) 
 }
-
+const OrgProfiles={
+    get : (username : string ) => requests.get<OrgProfile>(`/orgprofiles/${username}`),
+    uploadPhoto :(file:Blob) => {
+        let formData = new FormData();
+        formData.append('File',file);
+        return axios.post<Photo>('photos',formData,{
+            headers:{'Content-Type':'multipart/form-data'}
+        })
+    },
+    setMainPhoto : (id : string) => requests.post(`/photos/${id}/setMain`,{}),
+    deletePhoto : (id:string) => requests.del(`/photos/${id}`),
+   // updateProfile : (profile : Partial<Profile>) => requests.put('/profiles',profile),
+}
 const agent = {
     Profiles,
     Activities,
     Account,
     HelpRequests,
     OrganizationAccount,
-    JobAdversitement
+    JobAdversitement,
+    OrgProfiles
 
 }
 export default agent;

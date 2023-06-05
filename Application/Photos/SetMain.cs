@@ -29,7 +29,23 @@ namespace Application.Photos
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
                 var user = await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
-                if (user == null) return null;
+                if (user == null)
+                {
+                    var organization = await _context.Organizations.Include(p => p.Photos).FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
+                    if (organization == null)
+                    {
+                        return null;
+                    }
+                    var photo2 = organization.Photos.FirstOrDefault(x => x.Id == request.Id);
+                    if (photo2 == null) return null;
+                    var currentMain2 = organization.Photos.FirstOrDefault(x => x.IsMain);
+                    if (currentMain2 != null) currentMain2.IsMain = false;
+                    photo2.IsMain = true;
+                    var success2 = await _context.SaveChangesAsync() > 0;
+                    if (success2) return Result<Unit>.Success(Unit.Value);
+                    return Result<Unit>.Failure("Problem setting main photo");
+
+                }
                 var photo = user.Photos.FirstOrDefault(x => x.Id == request.Id);
                 if (photo == null) return null;
                 var currentMain = user.Photos.FirstOrDefault(x => x.IsMain);

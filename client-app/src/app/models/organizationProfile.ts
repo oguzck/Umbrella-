@@ -9,6 +9,8 @@ export interface OrgProfile {
     donationIban : string;
     donationDescription : string;
     jobAdversitements : JobAdversitements[]
+    phoneNumber : string;
+    contactEmail : string;
 }
 export interface Photo {
     id:string;

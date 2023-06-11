@@ -54,7 +54,9 @@ namespace Application.Core
                 .ForMember(d => d.Following, o => o.MapFrom(s => s.Followers.Any(x => x.Observer.UserName == currentUsername)));
 
             CreateMap<AppOrganization, OrganizationProfiles.OrganizationProfile>()
-                .ForMember(d => d.Image, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url));
+                .ForMember(d => d.Image, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url))
+                .ForMember(d => d.ContactEmail, o => o.MapFrom(s => s.Email))
+                .ForMember(d => d.PhoneNumber, o => o.MapFrom(s => s.PhoneNumber));
                 
 
 

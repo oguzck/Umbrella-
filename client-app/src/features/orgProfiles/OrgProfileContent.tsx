@@ -4,6 +4,10 @@ import { observer } from 'mobx-react-lite';
 import { useStore } from '../../app/stores/store';
 import { Tab } from 'semantic-ui-react';
 import ProfileHelpRequests from '../profiles/ProfileHelpRequests';
+import OrgProfilePhotos from './OrgProfilePhotos';
+import OrgProfileJobAdver from './OrgProfileJobAdver';
+import OrgProfileAbout from './OrgProfileAbout';
+import OrgProfilesDonation from './OrgProfilesDonation';
 
 
 interface Props {
@@ -11,18 +15,15 @@ interface Props {
 }
 
 export default observer(function ProfileContent({ profile }: Props) {
-  const{profileStore} = useStore();
+  const{orgProfileStore} = useStore();
   const panes = [
-    { menuItem: 'About', render: () => <Tab.Pane>test</Tab.Pane>  },
-    { menuItem: 'Photos', render: () => <Tab.Pane>test</Tab.Pane>  },
-    { menuItem: 'Donate Us', render: () => <Tab.Pane>test</Tab.Pane>  },
-    { menuItem: 'Job Adversitements', render: () =><Tab.Pane>test</Tab.Pane>   },
+    { menuItem: 'About', render: () => <OrgProfileAbout/>  },
+    { menuItem: 'Photos', render: () => <OrgProfilePhotos profile={profile}/>  },
+    { menuItem: 'Donate Us', render: () => <OrgProfilesDonation/>  },
+    { menuItem: 'Job Adversitements', render: () =><OrgProfileJobAdver profile={profile}/>   },
 
   ]
-  if (profileStore.isCurrentUser) {
-    panes.push({ menuItem: 'My Help Requests', render: () => <ProfileHelpRequests /> });
-  }
   return (
-    <Tab menu={{ fluid: true, vertical: true }} menuPosition='right' panes={panes} onTabChange={(e,data)=>profileStore.setActiveTab(data.activeIndex)} />
+    <Tab menu={{ fluid: true, vertical: true }} menuPosition='right' panes={panes} onTabChange={(e,data)=>orgProfileStore.setActiveTab(data.activeIndex)} />
   )
 })

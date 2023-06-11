@@ -83,5 +83,22 @@ export class JobAdverStore {
             }
         }
     }
+    deleteJobAdver = async (id: string) => {
+        this.loading = true;
+        try {
+            await agent.JobAdversitement.delete(id);
+            runInAction(() => {
+                this.jobAdversitementRegistry.delete(id);
+                this.loading = false;
+
+            })
+        } catch (error) {
+            console.log(error);
+            runInAction(() => {
+                this.loading = false;
+            })
+        }
+
+    }
 
 }

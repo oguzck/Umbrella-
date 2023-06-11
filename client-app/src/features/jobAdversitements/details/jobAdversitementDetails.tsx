@@ -3,21 +3,26 @@ import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import { useStore } from '../../../app/stores/store';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
-import { Segment,Image, Item, Header, Button, Grid, Icon } from 'semantic-ui-react';
+import { Segment, Image, Item, Header, Button, Grid, Icon } from 'semantic-ui-react';
+import { router } from '../../../app/router/Routes';
 
-export default observer( function JobAdversitementDetails() {
+export default observer(function JobAdversitementDetails() {
     const { id } = useParams();
     const { jobAdverStore } = useStore();
-    const { loadJobAdversitement, selectedJobAdversitement , loadingInitial ,clearSelectedJobAdversitement } = jobAdverStore
+    const { deleteJobAdver,loadJobAdversitement, selectedJobAdversitement, loadingInitial, clearSelectedJobAdversitement } = jobAdverStore
+    const { userStore } = useStore();
     useEffect(() => {
         if (id) loadJobAdversitement(id);
-        else
-        {return ()=>clearSelectedJobAdversitement();}
-    }, [id,loadJobAdversitement,clearSelectedJobAdversitement])
+        else { return () => clearSelectedJobAdversitement(); }
+    }, [id, loadJobAdversitement, clearSelectedJobAdversitement])
+    const deleteHandler = ()=> {
+        deleteJobAdver(id!)
+        router.navigate(`/organizationPanel`)
+    }
     const activityImageStyle = {
         filter: 'brightness(30%)'
     };
-    
+
     const activityImageTextStyle = {
         position: 'absolute',
         bottom: '5%',
@@ -26,9 +31,9 @@ export default observer( function JobAdversitementDetails() {
         height: 'auto',
         color: 'white'
     };
-    if ( loadingInitial  || !selectedJobAdversitement) return<LoadingComponent content={''}/>
-  return (
-    <Segment.Group>
+    if (loadingInitial || !selectedJobAdversitement) return <LoadingComponent content={''} />
+    return (
+        <Segment.Group>
             <Segment basic attached='top' style={{ padding: '0' }}>
                 <Image src={`/assets/helprequest2.png`} fluid style={activityImageStyle} />
                 <Segment style={activityImageTextStyle} basic>
@@ -38,16 +43,26 @@ export default observer( function JobAdversitementDetails() {
                                 <Header
                                     size='huge'
                                     content={selectedJobAdversitement.title}
-                                    style={{ color: 'white'  }}
+                                    style={{ color: 'white' }}
                                 />
                             </Item.Content>
                         </Item>
                     </Item.Group>
                 </Segment>
             </Segment>
-            <Segment clearing >
-                <Button as={Link} to={`/jobadversitements/${selectedJobAdversitement.id}/apply`} positive content='Apply'/>
-            </Segment>
+            {userStore.user?.isUser ?
+                (
+                <Segment clearing >
+                    <Button as={Link} to={`/jobadversitements/${selectedJobAdversitement.id}/apply`} positive content='Apply' />
+                </Segment>
+                
+                ) : (
+                    <Segment clearing >
+                        <Button onClick={deleteHandler} negative content='Delete' />
+                    </Segment>
+                    )
+                    }
+
             <Segment  >
                 <Grid>
                     <Grid.Column width={1}>
@@ -89,5 +104,5 @@ export default observer( function JobAdversitementDetails() {
                 </Grid>
             </Segment>
         </Segment.Group>
-  )
+    )
 })

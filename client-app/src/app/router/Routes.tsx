@@ -19,6 +19,7 @@ import JobAdversitementsDashboard from "../../features/jobAdversitements/dashboa
 import JobAdversitementDetails from "../../features/jobAdversitements/details/jobAdversitementDetails";
 import ApplicationForm from "../../features/jobAdversitements/form/ApplicationForm";
 import OrgProfilePage from "../../features/orgProfiles/OrgProfilePage";
+import OrgList from "../../features/organizations/organizationProfile/OrgList";
 
 export const routes : RouteObject[] = [
     {
@@ -32,6 +33,7 @@ export const routes : RouteObject[] = [
             {path :'helprequests',element : <HelpRequestDashboard/>},
             {path :'helprequests/:id',element : <HelpRequestDetailedPage/>},
             {path :'organizationPanel',element : <OrganizationPanel/>},
+            {path :'organizations',element : <OrgList/>},
             {path :'activities/:id',element : <ActivityDetails/>},
             {path :'createActivity',element : <ActivityForm key='create'/>},
             {path :'createHelpRequest',element : <HelpRequestForm key='create'/>},

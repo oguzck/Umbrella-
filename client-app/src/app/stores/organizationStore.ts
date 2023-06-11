@@ -41,4 +41,9 @@ export default class OrganizationStore{
             console.log(error);
         }
      }
+     setImage =(image:string) =>{
+        if (this.userOrg) {
+            this.userOrg.image = image;
+        }
+     }
 }

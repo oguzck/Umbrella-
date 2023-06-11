@@ -9,12 +9,18 @@ interface Props {
     profile: Profile
 }
 export default function ProfileEvents({ profile }: Props) {
+    function truncate(str: string | undefined) {
+        if (str) {
+          return str.length > 80 ? str.substring(0, 77) + '...' : str;
+        }
+      }
     return (
         <Tab.Pane>
             <Grid>
+            <Header floated='left' icon='bookmark' content='My Events' />
                 <Grid.Column width='16'>
                     {profile.activities.map((activity =>
-                        <Segment.Group>
+                        <Segment.Group style={{}} >
                             <Segment>
                                 {activity.isCanceled &&
                                     <Label attached='top' color='red' content='Cancelled' style={{ textAlign: 'center' }} />
@@ -38,7 +44,7 @@ export default function ProfileEvents({ profile }: Props) {
                                 </span>
                             </Segment>
                             <Segment clearing>
-                                <span>{activity.description}</span>
+                                <span>{truncate(activity.description)}</span>
                                 <Button as={Link} to={`/activities/${activity.id}`} color='teal' floated='right' content='View' />
                             </Segment>
                         </Segment.Group>

@@ -26,6 +26,7 @@ export default observer(function NavBar() {
                         <Menu.Item>
                             <Button as={NavLink} to='createHelpRequest' positive content='Need Help ?' />
                         </Menu.Item>
+                        <Menu.Item as={NavLink} to='/organizations' name='Donate Us' />
                         <Menu.Item position='right'>
                             <Image src={user?.image || '/assets/user.png'} avatar spaced='right' />
                             <Dropdown pointing='top left' text={user?.displayName}>
@@ -43,11 +44,11 @@ export default observer(function NavBar() {
                         <Menu.Item>
                             <Button as={NavLink} to='createJobadversitement' positive content='Create Job Adversitement' />
                         </Menu.Item>
-                        <Menu.Item as={NavLink} to='/errors' name='Errors' /><Menu.Item position='right'>
+                        <Menu.Item position='right'>
                             <Image src={userOrg?.image || '/assets/user.png'} avatar spaced='right' />
                             <Dropdown pointing='top left' text={userOrg?.displayName}>
                                 <Dropdown.Menu>
-                                    <DropdownItem as={Link} to={`/orgprofiles/${user?.userName}`} text='My Profile' icon='user' />
+                                    <DropdownItem as={Link} to={`/orgprofiles/${userOrg?.userName}`} text='My Profile' icon='user' />
                                     <DropdownItem onClick={logoutOrg} text='Logout' icon='power' />
                                 </Dropdown.Menu>
                             </Dropdown>

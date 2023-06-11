@@ -17,5 +17,7 @@ namespace Application.OrganizationProfiles
         public string DonationDescription { get; set; }
         public ICollection<Photo> Photos { get; set; }
         public ICollection<JobAdverDto> JobAdversitements { get; set; }
+        public string ContactEmail  { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

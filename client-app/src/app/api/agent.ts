@@ -127,6 +127,7 @@ const JobAdversitement = {
 }
 const OrgProfiles={
     get : (username : string ) => requests.get<OrgProfile>(`/orgprofiles/${username}`),
+    list : () => requests.get<OrgProfile[]>(`/orgprofiles`),
     uploadPhoto :(file:Blob) => {
         let formData = new FormData();
         formData.append('File',file);
@@ -136,7 +137,7 @@ const OrgProfiles={
     },
     setMainPhoto : (id : string) => requests.post(`/photos/${id}/setMain`,{}),
     deletePhoto : (id:string) => requests.del(`/photos/${id}`),
-   // updateProfile : (profile : Partial<Profile>) => requests.put('/profiles',profile),
+    updateProfile : (profile : Partial<OrgProfile>) => requests.put('/orgprofiles',profile),
 }
 const agent = {
     Profiles,

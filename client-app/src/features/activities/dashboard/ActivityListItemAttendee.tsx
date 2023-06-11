@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import ProfileCard from '../../profiles/ProfileCard';
 
 interface Props {
-    attendees: Profile[];
+    attendees: Profile[]
 }
 
 export default observer(function ActivityListItemAttendee({ attendees }: Props) {
@@ -16,9 +16,10 @@ export default observer(function ActivityListItemAttendee({ attendees }: Props) 
         borderWidht : 3,
 
     }
+    const displayedAttendees = attendees.slice(0, 10);
     return (
         <List horizontal>
-            {attendees.map(attendee => (
+            {displayedAttendees.map(attendee => (
                 <Popup hoverable key={attendee.username} trigger={
                     <List.Item key={attendee.username} as={Link} to={`/profiles/${attendee.username}`}>
                         <Image size='mini'

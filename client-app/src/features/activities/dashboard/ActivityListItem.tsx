@@ -18,6 +18,11 @@ export default function ActivityListItem({ activity }: Props) {
         setTarget(e.currentTarget.name);
         deleteActivity(id);
     }
+    function truncate(str: string | undefined) {
+        if (str) {
+          return str.length > 80 ? str.substring(0, 77) + '...' : str;
+        }
+      }
     return (
         <Segment.Group>
             <Segment>
@@ -51,10 +56,13 @@ export default function ActivityListItem({ activity }: Props) {
                 </span>
             </Segment>
             <Segment secondary>
+                {activity.attendees.length>10}
                 <ActivityListItemAttendee attendees={activity.attendees!} />
             </Segment>
             <Segment clearing>
-                <span>{activity.description}</span>
+                <div>
+                    {truncate(activity.description)}
+                </div>
                 <Button as={Link} to={`/activities/${activity.id}`} color='teal' floated='right' content='View' />
             </Segment>
         </Segment.Group>

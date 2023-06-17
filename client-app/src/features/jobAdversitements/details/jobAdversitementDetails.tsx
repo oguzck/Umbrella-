@@ -9,13 +9,13 @@ import { router } from '../../../app/router/Routes';
 export default observer(function JobAdversitementDetails() {
     const { id } = useParams();
     const { jobAdverStore } = useStore();
-    const { deleteJobAdver,loadJobAdversitement, selectedJobAdversitement, loadingInitial, clearSelectedJobAdversitement } = jobAdverStore
+    const { deleteJobAdver, loadJobAdversitement, selectedJobAdversitement, loadingInitial, clearSelectedJobAdversitement } = jobAdverStore
     const { userStore } = useStore();
     useEffect(() => {
         if (id) loadJobAdversitement(id);
         else { return () => clearSelectedJobAdversitement(); }
     }, [id, loadJobAdversitement, clearSelectedJobAdversitement])
-    const deleteHandler = ()=> {
+    const deleteHandler = () => {
         deleteJobAdver(id!)
         router.navigate(`/organizationPanel`)
     }
@@ -52,16 +52,23 @@ export default observer(function JobAdversitementDetails() {
             </Segment>
             {userStore.user?.isUser ?
                 (
-                <Segment clearing >
-                    <Button as={Link} to={`/jobadversitements/${selectedJobAdversitement.id}/apply`} positive content='Apply' />
-                </Segment>
-                
+                    <Segment clearing >
+                        <Button as={Link} to={`/jobadversitements/${selectedJobAdversitement.id}/apply`} positive content='Apply' />
+                    </Segment>
+
                 ) : (
                     <Segment clearing >
                         <Button onClick={deleteHandler} negative content='Delete' />
+                        {selectedJobAdversitement.applications.length < 1 ? (
+                            <Button as={Link} disabled to={`/jobadversitements/${selectedJobAdversitement.id}/applications`} floated='right' positive content='View Applications' />
+
+                        ) : (
+                            <Button as={Link} to={`/jobadversitements/${selectedJobAdversitement.id}/applications`} floated='right' positive content='View Applications' />
+
+                        )}
                     </Segment>
-                    )
-                    }
+                )
+            }
 
             <Segment  >
                 <Grid>

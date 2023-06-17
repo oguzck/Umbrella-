@@ -26,7 +26,7 @@ export default observer(function NavBar() {
                         <Menu.Item>
                             <Button as={NavLink} to='createHelpRequest' positive content='Need Help ?' />
                         </Menu.Item>
-                        <Menu.Item as={NavLink} to='/organizations' name='Donate Us' />
+                        <Menu.Item as={NavLink} to='/organizations' name='Organizations' />
                         <Menu.Item position='right'>
                             <Image src={user?.image || '/assets/user.png'} avatar spaced='right' />
                             <Dropdown pointing='top left' text={user?.displayName}>

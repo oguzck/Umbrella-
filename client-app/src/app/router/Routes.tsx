@@ -11,7 +11,7 @@ import ServerError from "../../features/errors/ServerError";
 import LoginForm from "../../features/users/LoginForm";
 import ProfilePage from "../../features/profiles/ProfilePage";
 import HelpRequestForm from "../../features/helpRequests/HelpRequestForm";
-import OrganizationPanel from "../../features/organizations/organizationPanel/OrganizationPanel";
+import OrganizationPanel from "../../features/organizations/orgPanelDetails/OrganizationPanel";
 import HelpRequestDashboard from "../../features/organizations/organizationPanel/HelpRequestDashboard";
 import HelpRequestDetailedPage from "../../features/organizations/organizationPanel/HelpRequestDetailedPage";
 import JobAdversitementForm from "../../features/jobAdversitements/form/JobAdversitementForm";
@@ -20,6 +20,7 @@ import JobAdversitementDetails from "../../features/jobAdversitements/details/jo
 import ApplicationForm from "../../features/jobAdversitements/form/ApplicationForm";
 import OrgProfilePage from "../../features/orgProfiles/OrgProfilePage";
 import OrgList from "../../features/organizations/organizationProfile/OrgList";
+import ApplicationList from "../../features/jobAdversitements/applications/ApplicationList";
 
 export const routes : RouteObject[] = [
     {
@@ -30,6 +31,7 @@ export const routes : RouteObject[] = [
             {path :'jobAdversitements',element : <JobAdversitementsDashboard/>},
             {path :'jobAdversitements/:id',element : <JobAdversitementDetails/>},
             {path :'jobAdversitements/:id/apply',element : <ApplicationForm/>},
+            {path :'jobAdversitements/:id/applications',element : <ApplicationList/>},
             {path :'helprequests',element : <HelpRequestDashboard/>},
             {path :'helprequests/:id',element : <HelpRequestDetailedPage/>},
             {path :'organizationPanel',element : <OrganizationPanel/>},

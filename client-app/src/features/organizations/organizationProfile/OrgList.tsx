@@ -29,9 +29,7 @@ export default observer(function OrgList() {
   if (loading) return (<LoadingComponent content='Loading organizations...' />)
   return (
     <>
-    
-    <Header content='Organizations' color='teal'/>
-    <Input
+        <Input
         style = {{outerHeight :'30px'}}
         icon='search'
         placeholder='Search For An Organization'

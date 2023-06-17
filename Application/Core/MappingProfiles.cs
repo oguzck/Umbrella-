@@ -28,7 +28,8 @@ namespace Application.Core
              CreateMap<JobApplications, JobApplicationsDto>()
                             .ForMember(d=>d.ApplicantImage ,o=>o.MapFrom(s=>s.Applicant.Photos.FirstOrDefault(x => x.IsMain).Url))
                             .ForMember(d=>d.ApplicantName ,o=>o.MapFrom(s=>s.Applicant.DisplayName))
-                            .ForMember(d=>d.ApplicantUsername ,o=>o.MapFrom(s=>s.Applicant.UserName));
+                            .ForMember(d=>d.ApplicantUsername ,o=>o.MapFrom(s=>s.Applicant.UserName))
+                            .ForMember(d=>d.ContactEmail ,o=>o.MapFrom(s=>s.Applicant.Email));
                             
 
             CreateMap<Activity, Activity>();

@@ -5,6 +5,7 @@ export interface Applications {
     applicantUsername: string,
     coverLetter: string,
     educationLevel: string
+    contactEmail: string
 }
 export interface ApplicationFormValues{
     id: string,

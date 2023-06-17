@@ -15,7 +15,5 @@ namespace Domain
         public string CoverLetter { get; set; }
         public string EducationLevel { get; set; }
 
-
-
     }
 }

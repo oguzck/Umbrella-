@@ -11,6 +11,8 @@ import { Organization, OrganizationFormValues } from '../models/organization';
 import { ApplicationFormValues, Applications } from '../models/applications';
 import { JobAdversitements, JobAdversitementsFormValues } from '../models/jobAdversitement';
 import { OrgProfile } from '../models/organizationProfile';
+import { PaginatedResult } from '../models/pagination';
+import { json } from 'stream/consumers';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -31,6 +33,11 @@ axios.interceptors.request.use(config=>{
 
 axios.interceptors.response.use(async response => {
     await sleep(1000);
+    const pagination = response.headers['pagination'];
+    if(pagination){
+        response.data = new PaginatedResult(response.data,JSON.parse(pagination));
+        return response as AxiosResponse<PaginatedResult<any>>
+    }
     return response;
 }, (error: AxiosError) => {
     const { data, status ,config } = error.response as AxiosResponse;
@@ -76,7 +83,8 @@ const requests = {
 }
 
 const Activities = {
-    list: () => requests.get<Activity[]>('/activities'),
+    list: (params : URLSearchParams) => axios.get<PaginatedResult<Activity[]>>('/activities',{params}).then(responseBody),
+    list2: () => requests.get<PaginatedResult<Activity[]>>('/activities'),
     details: (id: string) => requests.get<Activity>(`/activities/${id}`),
     create: (activity: ActivityFormValues) => requests.post<void>('/activities', activity),
     update: (activity: ActivityFormValues) => requests.put<void>(`/activities/${activity.id}`, activity),

@@ -46,11 +46,11 @@ export default class ProfileStore{
         this.loadingProfile = true;
         try {
             const profile =  await agent.Profiles.get(username)
-            const activities = await agent.Activities.list();
+            const activities = await agent.Activities.list2();
             runInAction(()=>{
                 this.profile =profile;
                 this.MyHelpRequests=profile.helpRequests
-                this.profile.activities = activities.filter(x=>x.hostUsername==profile.username)
+                this.profile.activities = activities.data.filter(x=>x.hostUsername==profile.username)
                 this.loadingProfile = false;
             })
         } catch (error) {

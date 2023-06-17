@@ -13,5 +13,6 @@ namespace Application.JobAdversitements
         public string ApplicantUsername { get; set; }
         public string CoverLetter { get; set; }
         public string EducationLevel { get; set; }
+        public string ContactEmail { get; set; }
     }
 }

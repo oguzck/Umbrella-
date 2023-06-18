@@ -21,18 +21,27 @@ namespace Application.Core
                .ForMember(d => d.Email, o => o.MapFrom(s => s.Author.Email));
 
             CreateMap<JobAdver, JobAdverDto>()
-                        .ForMember(d=>d.OrganizationName,o=>o.MapFrom(s=>s.organization.DisplayName))
-                        .ForMember(d=>d.OrganizationUserName,o=>o.MapFrom(s=>s.organization.UserName))
-                        .ForMember(d=>d.OrganizationImage,o=>o.MapFrom(s=>s.organization.Photos.FirstOrDefault(x => x.IsMain).Url));
+                        .ForMember(d => d.OrganizationName, o => o.MapFrom(s => s.organization.DisplayName))
+                        .ForMember(d => d.OrganizationUserName, o => o.MapFrom(s => s.organization.UserName))
+                        .ForMember(d => d.OrganizationImage, o => o.MapFrom(s => s.organization.Photos.FirstOrDefault(x => x.IsMain).Url));
 
-             CreateMap<JobApplications, JobApplicationsDto>()
-                            .ForMember(d=>d.ApplicantImage ,o=>o.MapFrom(s=>s.Applicant.Photos.FirstOrDefault(x => x.IsMain).Url))
-                            .ForMember(d=>d.ApplicantName ,o=>o.MapFrom(s=>s.Applicant.DisplayName))
-                            .ForMember(d=>d.ApplicantUsername ,o=>o.MapFrom(s=>s.Applicant.UserName))
-                            .ForMember(d=>d.ContactEmail ,o=>o.MapFrom(s=>s.Applicant.Email));
-                            
+            CreateMap<JobApplications, JobApplicationsDto>()
+                           .ForMember(d => d.ApplicantImage, o => o.MapFrom(s => s.Applicant.Photos.FirstOrDefault(x => x.IsMain).Url))
+                           .ForMember(d => d.ApplicantName, o => o.MapFrom(s => s.Applicant.DisplayName))
+                           .ForMember(d => d.ApplicantUsername, o => o.MapFrom(s => s.Applicant.UserName))
+                           .ForMember(d => d.ContactEmail, o => o.MapFrom(s => s.Applicant.Email));
+
 
             CreateMap<Activity, Activity>();
+
+            CreateMap<ActivityAttendee, Profiles.UserActivityDto>()
+                .ForMember(d => d.Category, o => o.MapFrom(s => s.Activity.Category))
+                .ForMember(d => d.Date, o => o.MapFrom(s => s.Activity.Date))
+                .ForMember(d => d.HostUsername, o => o.MapFrom(s=>s.Activity.Attendees.FirstOrDefault(x=>x.IsHost).AppUser.UserName))
+                .ForMember(d => d.Id, o => o.MapFrom(s => s.ActivityId))
+                .ForMember(d => d.Title, o => o.MapFrom(s => s.Activity.Title));
+
+
             CreateMap<Activity, ActivityDto>().ForMember(d => d.HostUsername, o => o
             .MapFrom(s => s.Attendees.FirstOrDefault(x => x.IsHost).AppUser.UserName));
 
@@ -58,7 +67,7 @@ namespace Application.Core
                 .ForMember(d => d.Image, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ForMember(d => d.ContactEmail, o => o.MapFrom(s => s.Email))
                 .ForMember(d => d.PhoneNumber, o => o.MapFrom(s => s.PhoneNumber));
-                
+
 
 
             CreateMap<Comment, CommentDto>()

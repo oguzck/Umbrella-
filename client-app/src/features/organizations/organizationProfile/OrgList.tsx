@@ -30,6 +30,7 @@ export default observer(function OrgList() {
   return (
     <>
         <Input
+        fluid
         style = {{outerHeight :'30px'}}
         icon='search'
         placeholder='Search For An Organization'

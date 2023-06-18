@@ -4,6 +4,7 @@ import agent from "../api/agent";
 import { store } from "./store";
 import { HelpRequest } from "../models/HelpRequest";
 import { Activity } from "../models/activity";
+import { UserActivity } from "../models/userActivity";
 
 export default class ProfileStore{
     profile : Profile | null = null;
@@ -14,8 +15,10 @@ export default class ProfileStore{
     loadingFollowings = false; 
     activeTab = 0;
     loadingHelpRequests = false;
+    loadingActivities = false;
     MyHelpRequests : HelpRequest[]=[];
     MyActivities : Activity[]=[]
+    UserActivities : UserActivity[]=[]
 
     constructor() {
         makeAutoObservable(this);
@@ -166,6 +169,20 @@ export default class ProfileStore{
         } catch (error) {
             console.log(error);
             runInAction(()=> this.loadingFollowings= false)
+        }
+
+    }
+    loadActivities = async (predicate? : string)=>{
+        this.loadingActivities = true ;
+        try {
+            const activities = await agent.Profiles.listActivities(this.profile!.username,predicate!);
+            runInAction(()=>{
+                this.UserActivities = activities;
+                this.loadingActivities = false;
+            })
+        } catch (error) {
+            console.log(error);
+            runInAction(()=> this.loadingActivities= false)
         }
 
     }

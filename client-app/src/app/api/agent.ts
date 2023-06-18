@@ -13,6 +13,7 @@ import { JobAdversitements, JobAdversitementsFormValues } from '../models/jobAdv
 import { OrgProfile } from '../models/organizationProfile';
 import { PaginatedResult } from '../models/pagination';
 import { json } from 'stream/consumers';
+import { UserActivity } from '../models/userActivity';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -117,7 +118,8 @@ const Profiles={
     deletePhoto : (id:string) => requests.del(`/photos/${id}`),
     updateProfile : (profile : Partial<Profile>) => requests.put('/profiles',profile),
     updateFollowing : (username: string) => requests.post(`/follow/${username}`,{}),
-    listFollowings : (username : string , predicate : string) => requests.get<Profile[]>(`/follow/${username}?predicate=${predicate}`)
+    listFollowings : (username : string , predicate : string) => requests.get<Profile[]>(`/follow/${username}?predicate=${predicate}`),
+    listActivities : (username : string , predicate : string) => requests.get<UserActivity[]>(`/profiles/${username}/activities?predicate=${predicate}`)
 }
 const HelpRequests = {
     create: (helprequest: HelpRequestFormValues) => requests.post<void>('/helprequests', helprequest),

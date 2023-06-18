@@ -18,7 +18,7 @@ export default observer(function ProfileContent({ profile }: Props) {
   const panes = [
     { menuItem: 'About', render: () => <ProfileAbout /> },
     { menuItem: 'Photos', render: () => <ProfilePhotos profile={profile} /> },
-    { menuItem: 'Events', render: () => <ProfileEvents profile={profile}/> },
+    { menuItem: 'Events', render: () => <ProfileEvents /> },
     { menuItem: 'Followers', render: () => <ProfileFollowings /> },
     { menuItem: 'Following', render: () => <ProfileFollowings /> },
   ]

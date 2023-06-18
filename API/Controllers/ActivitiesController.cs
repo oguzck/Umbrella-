@@ -14,7 +14,7 @@ namespace API.Controllers
     {
        //[Authorize(Roles = "User")]
         [HttpGet]
-        public async Task<IActionResult> GetActivities([FromQuery]PagingParams param)
+        public async Task<IActionResult> GetActivities([FromQuery]ActivityParams param)
         {
             return HandlePagedResult(await Mediator.Send(new List.Query{Params = param}));
         }

@@ -1,5 +1,5 @@
 
-import { action, makeAutoObservable, makeObservable, observable } from "mobx";
+import { action, makeAutoObservable, makeObservable, observable, reaction } from "mobx";
 import { runInAction } from "mobx";
 import agent from "../api/agent";
 import { Activity, ActivityFormValues } from "../models/activity";
@@ -18,18 +18,61 @@ export default class ActivityStore {
     loadingInital = false;
     pagination : Pagination|null=null
     pagingParams = new PagingParams();
+    predicate = new Map().set('all',true)
     constructor() {
         makeAutoObservable(this);
+        reaction(
+            ()=>this.predicate.keys(),
+            ()=>{
+                this.pagingParams= new PagingParams();
+                this.activityRegistry.clear();
+                this.loadActivities();
+            }
+
+        )
 
     }
     setPagingParams=(pagingParams : PagingParams)=>{
         this.pagingParams=pagingParams
     }
 
+    setPredicate =(predicate:string,value : string | Date)=>{
+        const resetPredicte =() =>{
+            this.predicate.forEach((value,key)=>{
+                if(key !='startDate') this.predicate.delete(key)
+            })
+        }
+        switch(predicate){
+            case 'all' :
+                resetPredicte();
+                this.predicate.set('all',true)
+                break;
+            case 'isGoing' :
+                resetPredicte();
+                this.predicate.set('isGoing',true)
+                break;
+            case 'isHost' :
+                resetPredicte();
+                this.predicate.set('isHost',true)
+                break;
+            case 'startDate' :
+                this.predicate.delete('startDate')
+                this.predicate.set('startDate',value)
+                break;
+        }
+    }
+
     get axiosParams(){
         const params = new URLSearchParams()
         params.append('pageNumber',this.pagingParams.pageNumber.toString())
         params.append('pageSize',this.pagingParams.pageSize.toString())
+        this.predicate.forEach((value,key)=>{
+            if(key === 'startDate'){
+                params.append(key,(value as Date).toISOString())
+            }else{
+                params.append(key,value)
+            }
+        })
         return params;
     }
 

@@ -45,7 +45,7 @@ try
     var orgmanager = services.GetRequiredService<UserManager<AppOrganization>>();
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
     await context.Database.MigrateAsync();
-    await Seed.SeedData(context,userManager,roleManager);
+    await Seed.SeedData(context,userManager,orgmanager,roleManager);
 }
 catch (Exception ex)
 {

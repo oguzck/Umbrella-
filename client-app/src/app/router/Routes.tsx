@@ -21,28 +21,32 @@ import ApplicationForm from "../../features/jobAdversitements/form/ApplicationFo
 import OrgProfilePage from "../../features/orgProfiles/OrgProfilePage";
 import OrgList from "../../features/organizations/organizationProfile/OrgList";
 import ApplicationList from "../../features/jobAdversitements/applications/ApplicationList";
+import RequireAuth from "./RequireAuth";
 
 export const routes : RouteObject[] = [
     {
         path : '/',
         element : <App/>,
         children : [
-            {path :'activities',element : <ActivityDashboard/>},
-            {path :'jobAdversitements',element : <JobAdversitementsDashboard/>},
-            {path :'jobAdversitements/:id',element : <JobAdversitementDetails/>},
-            {path :'jobAdversitements/:id/apply',element : <ApplicationForm/>},
+            {element:<RequireAuth/> , children: [
+                {path :'activities',element : <ActivityDashboard/>},
+                {path :'jobAdversitements',element : <JobAdversitementsDashboard/>},
+                {path :'jobAdversitements/:id',element : <JobAdversitementDetails/>},
+                {path :'jobAdversitements/:id/apply',element : <ApplicationForm/>},
+                {path :'helprequests/:id',element : <HelpRequestDetailedPage/>},
+                {path :'organizations',element : <OrgList/>},
+                {path :'activities/:id',element : <ActivityDetails/>},
+                {path :'createActivity',element : <ActivityForm key='create'/>},
+                {path :'createHelpRequest',element : <HelpRequestForm key='create'/>},
+                {path :'profiles/:username',element : <ProfilePage/>},
+                {path :'orgprofiles/:username',element : <OrgProfilePage/>},
+                {path :'manage/:id',element : <ActivityForm key='manage'/>},
+                
+            ]},
             {path :'jobAdversitements/:id/applications',element : <ApplicationList/>},
             {path :'helprequests',element : <HelpRequestDashboard/>},
-            {path :'helprequests/:id',element : <HelpRequestDetailedPage/>},
             {path :'organizationPanel',element : <OrganizationPanel/>},
-            {path :'organizations',element : <OrgList/>},
-            {path :'activities/:id',element : <ActivityDetails/>},
-            {path :'createActivity',element : <ActivityForm key='create'/>},
-            {path :'createHelpRequest',element : <HelpRequestForm key='create'/>},
             {path :'createJobadversitement',element : <JobAdversitementForm/>},
-            {path :'manage/:id',element : <ActivityForm key='manage'/>},
-            {path :'profiles/:username',element : <ProfilePage/>},
-            {path :'orgprofiles/:username',element : <OrgProfilePage/>},
             {path :'login',element : <LoginForm/>},
             {path :'errors',element : <TestErrors/>},
             {path :'not-found',element : <NotFound content="We could not found what you are looking for"/>},

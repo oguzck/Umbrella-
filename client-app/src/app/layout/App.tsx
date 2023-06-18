@@ -5,7 +5,7 @@ import NavBar from './NavBar';
 import LoadingComponent from './LoadingComponent';
 import { useStore } from '../stores/store';
 import { observer } from 'mobx-react-lite';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom';
 import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
 import ActivityDetails from '../../features/activities/details/ActivityDetails';
 import ActivityForm from '../../features/activities/form/ActivityForm';
@@ -35,6 +35,7 @@ function App() {
 
   return (
     <>
+    <ScrollRestoration/>
       <ModalContainer/>
       <ToastContainer position='bottom-right' hideProgressBar theme='colored' />
       {location.pathname === "/" ? <HomePage  /> : (

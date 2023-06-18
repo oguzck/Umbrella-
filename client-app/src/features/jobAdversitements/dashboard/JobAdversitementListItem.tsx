@@ -16,7 +16,7 @@ export default function JobAdversitementListItem({jobadver}:Props) {
             <Segment>
                 <Item.Group>
                     <Item>
-                    <Item.Image size='tiny' circular src={jobadver.organizationImage || 'assets/user.png'} />
+                    <Item.Image size='tiny' circular src={jobadver.organizationImage || '/assets/user.png'} />
                         <Item.Content>
                             <Item.Header as={Link} to={`/jobadversitements/${jobadver.id}`} >{jobadver.title}</Item.Header>
                             <Item.Description> <Link to={`/orgprofiles/${jobadver.organizationUserName}`}>{jobadver.organizationName}</Link> </Item.Description>

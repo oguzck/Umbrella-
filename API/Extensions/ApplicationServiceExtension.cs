@@ -12,6 +12,7 @@ using FluentValidation;
 using Application.Interfaces;
 using Infrastructure.Security;
 using Infrastructure.Photos;
+using Infrastructure.Email;
 
 namespace API.Extensions
 {
@@ -46,6 +47,7 @@ namespace API.Extensions
             services.AddValidatorsFromAssemblyContaining<Application.JobAdversitements.Create>();
             services.AddHttpContextAccessor();
             services.AddScoped<IUserAccessor,UserAccessor>();
+            services.AddScoped<EmailSender>();
             services.AddScoped<IPhotoAccessor,PhotoAccessor>();
             services.Configure<CloudinarySettings>(config.GetSection("Cloudinary"));
             services.AddSignalR();

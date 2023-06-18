@@ -23,11 +23,13 @@ namespace API.Extensions
             services.AddIdentityCore<AppUser>(opt =>
             {
                 opt.Password.RequireNonAlphanumeric = false;
-                opt.User.RequireUniqueEmail = true;
+                opt.SignIn.RequireConfirmedAccount = true;
 
 
             }).AddRoles<IdentityRole>()
-            .AddEntityFrameworkStores<DataContext>();
+            .AddEntityFrameworkStores<DataContext>()
+            .AddSignInManager<SignInManager<AppUser>>()
+            .AddDefaultTokenProviders();
 
             services.AddIdentityCore<AppOrganization>(opt =>
             {

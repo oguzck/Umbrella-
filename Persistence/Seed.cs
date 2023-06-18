@@ -14,6 +14,7 @@ namespace Persistence
                     {
                         new AppUser
                         {
+                            EmailConfirmed=true,
                             DisplayName = "Bob",
                             UserName = "bob",
                             Email = "bob@test.com",
@@ -21,6 +22,7 @@ namespace Persistence
                         },
                         new AppUser
                         {
+                            EmailConfirmed=true,
                             DisplayName = "Jane",
                             UserName = "jane",
                             Email = "jane@test.com",
@@ -28,6 +30,7 @@ namespace Persistence
                         },
                         new AppUser
                         {
+                            EmailConfirmed=true,
                             DisplayName = "Tom",
                             UserName = "tom",
                             Email = "tom@test.com",
@@ -35,6 +38,7 @@ namespace Persistence
                         },
                         new AppUser
                         {
+                            EmailConfirmed=true,
                             DisplayName = "Oğuz Can Kılıçkaya",
                             UserName = "oguzck",
                             Email = "oguz@test.com",

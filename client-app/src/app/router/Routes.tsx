@@ -22,6 +22,8 @@ import OrgProfilePage from "../../features/orgProfiles/OrgProfilePage";
 import OrgList from "../../features/organizations/organizationProfile/OrgList";
 import ApplicationList from "../../features/jobAdversitements/applications/ApplicationList";
 import RequireAuth from "./RequireAuth";
+import RegisterSuccess from "../../features/users/RegisterSuccess";
+import ConfirmEmail from "../../features/users/ConfirmEmail";
 
 export const routes : RouteObject[] = [
     {
@@ -30,25 +32,27 @@ export const routes : RouteObject[] = [
         children : [
             {element:<RequireAuth/> , children: [
                 {path :'activities',element : <ActivityDashboard/>},
-                {path :'jobAdversitements',element : <JobAdversitementsDashboard/>},
-                {path :'jobAdversitements/:id',element : <JobAdversitementDetails/>},
                 {path :'jobAdversitements/:id/apply',element : <ApplicationForm/>},
-                {path :'helprequests/:id',element : <HelpRequestDetailedPage/>},
                 {path :'organizations',element : <OrgList/>},
                 {path :'activities/:id',element : <ActivityDetails/>},
                 {path :'createActivity',element : <ActivityForm key='create'/>},
                 {path :'createHelpRequest',element : <HelpRequestForm key='create'/>},
-                {path :'profiles/:username',element : <ProfilePage/>},
                 {path :'orgprofiles/:username',element : <OrgProfilePage/>},
                 {path :'manage/:id',element : <ActivityForm key='manage'/>},
                 
             ]},
+            {path :'profiles/:username',element : <ProfilePage/>},
+            {path :'helprequests/:id',element : <HelpRequestDetailedPage/>},
+            {path :'jobAdversitements',element : <JobAdversitementsDashboard/>},
+            {path :'jobAdversitements/:id',element : <JobAdversitementDetails/>},
             {path :'jobAdversitements/:id/applications',element : <ApplicationList/>},
             {path :'helprequests',element : <HelpRequestDashboard/>},
             {path :'organizationPanel',element : <OrganizationPanel/>},
             {path :'createJobadversitement',element : <JobAdversitementForm/>},
             {path :'login',element : <LoginForm/>},
             {path :'errors',element : <TestErrors/>},
+            {path :'account/registerSuccess',element : <RegisterSuccess/>},
+            {path :'account/verifyEmail',element : <ConfirmEmail/>},
             {path :'not-found',element : <NotFound content="We could not found what you are looking for"/>},
             {path :'server-error',element : <ServerError/>},
             {path :'*',element : <Navigate replace to='/not-found'/>},

@@ -33,9 +33,11 @@ export default observer(function JobAdversitementDetails() {
     };
     if (loadingInitial || !selectedJobAdversitement) return <LoadingComponent content={''} />
     return (
-        <Segment.Group>
+        <><Grid textAlign='center' >
+            <Grid.Column  width={10}>
+            <Segment.Group>
             <Segment basic attached='top' style={{ padding: '0' }}>
-                <Image src={`/assets/helprequest2.png`} fluid style={activityImageStyle} />
+                <Image src={`/assets/jobadverim.png`} fluid style={activityImageStyle} />
                 <Segment style={activityImageTextStyle} basic>
                     <Item.Group>
                         <Item>
@@ -43,8 +45,7 @@ export default observer(function JobAdversitementDetails() {
                                 <Header
                                     size='huge'
                                     content={selectedJobAdversitement.title}
-                                    style={{ color: 'white' }}
-                                />
+                                    style={{ color: 'white' }} />
                             </Item.Content>
                         </Item>
                     </Item.Group>
@@ -52,13 +53,13 @@ export default observer(function JobAdversitementDetails() {
             </Segment>
             {userStore.user?.isUser ?
                 (
-                    <Segment clearing >
-                        <Button as={Link} to={`/jobadversitements/${selectedJobAdversitement.id}/apply`} positive content='Apply' />
+                    <Segment clearing>
+                        <Button floated='left' as={Link} to={`/jobadversitements/${selectedJobAdversitement.id}/apply`} positive content='Apply' />
                     </Segment>
 
                 ) : (
-                    <Segment clearing >
-                        <Button onClick={deleteHandler} negative content='Delete' />
+                    <Segment clearing>
+                        <Button onClick={deleteHandler} floated='left' negative content='Delete' />
                         {selectedJobAdversitement.applications.length < 1 ? (
                             <Button as={Link} disabled to={`/jobadversitements/${selectedJobAdversitement.id}/applications`} floated='right' positive content='View Applications' />
 
@@ -67,10 +68,9 @@ export default observer(function JobAdversitementDetails() {
 
                         )}
                     </Segment>
-                )
-            }
+                )}
 
-            <Segment  >
+            <Segment>
                 <Grid>
                     <Grid.Column width={1}>
                         <Icon size='large' color='teal' name='building' />
@@ -80,7 +80,7 @@ export default observer(function JobAdversitementDetails() {
                     </Grid.Column>
                 </Grid>
             </Segment>
-            <Segment  >
+            <Segment>
                 <Grid>
                     <Grid.Column width={1}>
                         <Icon size='large' color='teal' name='marker' />
@@ -90,7 +90,7 @@ export default observer(function JobAdversitementDetails() {
                     </Grid.Column>
                 </Grid>
             </Segment>
-            <Segment  >
+            <Segment>
                 <Grid>
                     <Grid.Column width={1}>
                         <Icon size='large' color='teal' name='info' />
@@ -100,7 +100,7 @@ export default observer(function JobAdversitementDetails() {
                     </Grid.Column>
                 </Grid>
             </Segment>
-            <Segment  >
+            <Segment>
                 <Grid>
                     <Grid.Column width={1}>
                         <Icon size='large' color='teal' name='tasks' />
@@ -111,5 +111,8 @@ export default observer(function JobAdversitementDetails() {
                 </Grid>
             </Segment>
         </Segment.Group>
+        </Grid.Column>
+        </Grid>
+        </>
     )
 })

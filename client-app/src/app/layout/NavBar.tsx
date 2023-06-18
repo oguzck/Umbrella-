@@ -7,7 +7,9 @@ import { observer } from 'mobx-react-lite';
 
 
 export default observer(function NavBar() {
-    const { userStore: { user, logout }, organizationStore: { logoutOrg, userOrg } } = useStore();
+    const { userStore, organizationStore } = useStore();
+    const { user, logout } = userStore
+    const { logoutOrg, userOrg } = organizationStore
     return (
 
         <Menu inverted fixed='top'>
@@ -16,7 +18,10 @@ export default observer(function NavBar() {
                     <img src='/assets/logo3.png' alt="logo" style={{ marginRight: '10px' }}></img>
                     Umbrella
                 </Menu.Item>
-                {user?.isUser ? (
+
+                {user?.isUser && 
+                <>
+                {userStore.isLoggedIn &&
                     <>
                         <Menu.Item as={NavLink} to='/activities' name='Activities' />
                         <Menu.Item as={NavLink} to='/jobadversitements' name='Job Adversitements' />
@@ -36,8 +41,14 @@ export default observer(function NavBar() {
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Menu.Item>
-                    </>
-                ) : (
+                    </>}
+                </>
+                }
+                
+                
+                {!user?.isUser &&
+                    <>
+                    {organizationStore.isLoggedIn && 
                     <>
                         <Menu.Item as={NavLink} to='/organizationPanel' name='Organization Panel' />
                         <Menu.Item as={NavLink} to='/helprequests' name='Help Requests' />
@@ -53,11 +64,13 @@ export default observer(function NavBar() {
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Menu.Item>
+                    </>}
                     </>
-                )
-
 
                 }
+
+
+
             </Container>
         </Menu>
     )

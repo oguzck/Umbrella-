@@ -37,10 +37,10 @@ export const routes : RouteObject[] = [
                 {path :'activities/:id',element : <ActivityDetails/>},
                 {path :'createActivity',element : <ActivityForm key='create'/>},
                 {path :'createHelpRequest',element : <HelpRequestForm key='create'/>},
-                {path :'orgprofiles/:username',element : <OrgProfilePage/>},
                 {path :'manage/:id',element : <ActivityForm key='manage'/>},
                 
             ]},
+            {path :'orgprofiles/:username',element : <OrgProfilePage/>},
             {path :'profiles/:username',element : <ProfilePage/>},
             {path :'helprequests/:id',element : <HelpRequestDetailedPage/>},
             {path :'jobAdversitements',element : <JobAdversitementsDashboard/>},

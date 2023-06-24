@@ -16,7 +16,7 @@ export default function JobAdversitementListItem({jobadver}:Props) {
             <Segment>
                 <Item.Group>
                     <Item>
-                    <Item.Image size='tiny' circular src={jobadver.organizationImage || '/assets/user.png'} />
+                    <Item.Image size='tiny' circular  src={jobadver.organizationImage || '/assets/jobadverim2.png'} />
                         <Item.Content>
                             <Item.Header as={Link} to={`/jobadversitements/${jobadver.id}`} >{jobadver.title}</Item.Header>
                             <Item.Description> <Link to={`/orgprofiles/${jobadver.organizationUserName}`}>{jobadver.organizationName}</Link> </Item.Description>
@@ -34,7 +34,7 @@ export default function JobAdversitementListItem({jobadver}:Props) {
                     </Item>
                 </Item.Group>
             </Segment>
-            <Segment>
+            <Segment clearing>
                 <span>
                     <Icon name='clock' /> <span>{formattedDate} </span> 
                     <br></br> 

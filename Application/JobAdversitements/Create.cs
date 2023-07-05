@@ -45,9 +45,9 @@ namespace Application.JobAdversitements
                 var adversitement = new JobAdver
                 {
                     Title = request.JobAdver.Title,
-                    Date = DateTime.Now,
+                    Date = DateTime.UtcNow,
                     City = request.JobAdver.City,
-                    ExpiringDate = DateTime.Now.AddDays(30),
+                    ExpiringDate = DateTime.UtcNow.AddDays(30),
                     Description = request.JobAdver.Description,
                     Skills = request.JobAdver.Skills,
                     isActive = true,

@@ -48,7 +48,7 @@ namespace Application.HelpRequests
                 var helpRequest = new HelpRequest
                 {
                     Title = request.HelpRequest.Title,
-                    Date = DateTime.Now,
+                    Date = DateTime.UtcNow,
                     Description = request.HelpRequest.Description,
                     ContactNumber = request.HelpRequest.ContactNumber,
                     Adress=request.HelpRequest.Adress,

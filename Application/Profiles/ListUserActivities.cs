@@ -37,9 +37,9 @@ namespace Application.Profiles
                 var query = _context.ActivityAttendee.Where(x=>x.AppUser.UserName==request.Username).OrderBy(a=>a.Activity.Date).ProjectTo<UserActivityDto>(_mapper.ConfigurationProvider).AsQueryable();
 
                 query = request.Predicate switch{
-                    "past" => query.Where(a=>a.Date<=DateTime.Now),
+                    "past" => query.Where(a=>a.Date<=DateTime.UtcNow),
                     "hosting" => query.Where(a=>a.HostUsername==request.Username),
-                    _ => query.Where(a=>a.Date>=DateTime.Now),
+                    _ => query.Where(a=>a.Date>=DateTime.UtcNow),
                 };
                 var userActivities = await query.ToListAsync();
                 return Result<List<UserActivityDto>>.Success(userActivities);
